@@ -19,7 +19,7 @@ class View {
 public:
 	View(const std::shared_ptr<sf::RenderWindow> & window);
 
-	void render();
+	void renderBG();
 };
 
 #endif /* defined(__Quadrae__View__) */

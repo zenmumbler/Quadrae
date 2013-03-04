@@ -14,10 +14,12 @@ Game::Game(const std::shared_ptr<sf::RenderWindow> & window)
 	
 }
 
+
 void Game::handleEvent(const sf::Event & event) {
 	
 }
 
+
 void Game::step() {
-	
+	view_->renderBG();
 }

@@ -13,6 +13,15 @@
 #include "Common.h"
 #include "View.h"
 
+enum class Direction {
+	None,
+	Left,
+	Right,
+	Down,
+	Drop
+};
+
+
 class Game {
 	Time::Point lastStep_;
 	std::shared_ptr<sf::RenderWindow> window_;

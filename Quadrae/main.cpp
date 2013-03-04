@@ -15,6 +15,7 @@ static bool running_;
 static std::shared_ptr<sf::RenderWindow> window_;
 static std::unique_ptr<Game> game_;
 
+
 static void handleEvents() {
 	sf::Event event;
 	
@@ -32,6 +33,7 @@ static void handleEvents() {
 	}
 }
 
+
 static void mainLoop() {
 	running_ = true;
 	
@@ -42,6 +44,7 @@ static void mainLoop() {
 		window_->Display();
 	}
 }
+
 
 static void init() {
 	window_.reset(new sf::RenderWindow(sf::VideoMode(400, 528), "Quadrae", sf::Style::Close));
