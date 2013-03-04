@@ -12,6 +12,7 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "Common.h"
+#include "Shape.h"
 
 class View {
 	std::shared_ptr<sf::RenderWindow> window_;
@@ -20,6 +21,7 @@ public:
 	View(const std::shared_ptr<sf::RenderWindow> & window);
 
 	void renderBG();
+	void renderShape(const ShapeGrid & shape, float x, float y);
 };
 
 #endif /* defined(__Quadrae__View__) */

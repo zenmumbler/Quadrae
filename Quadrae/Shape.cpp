@@ -26,7 +26,7 @@ static ShapeGrid rotateCW(const ShapeGrid & field, int px, int py) {
 			}
 			
 			if (dx < 0 || dx > 3 || dy < 0 || dy > 3)
-				return false;
+				continue;
 			
 			if (field[(sy * 4) + sx])
 				out.set((dy * 4) + dx);
@@ -67,13 +67,13 @@ static std::vector<Shape> * createShapes() {
 	shapes->emplace_back(makeMask(0b0000,
 								  0b1110,
 								  0b0100,
-								  0b0000), 1, 1, 4);
+								  0b0000), 2, 2, 4);
 	
 	// Right Hook
 	shapes->emplace_back(makeMask(0b0000,
 								  0b1110,
 								  0b0010,
-								  0b0000), 1, 1, 4);
+								  0b0000), 2, 2, 4);
 	
 	// Left Stair
 	shapes->emplace_back(makeMask(0b0000,
@@ -97,13 +97,13 @@ static std::vector<Shape> * createShapes() {
 	shapes->emplace_back(makeMask(0b0000,
 								  0b1110,
 								  0b1000,
-								  0b0000), 1, 1, 4);
+								  0b0000), 2, 2, 4);
 	
 	// Bar
 	shapes->emplace_back(makeMask(0b0000,
 								  0b0000,
 								  0b1111,
-								  0b0000), 2, 2, 2);
+								  0b0000), 1, 1, 2);
 	
 	return shapes;
 }

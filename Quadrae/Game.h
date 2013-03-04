@@ -26,6 +26,7 @@ class Game {
 	Time::Point lastStep_;
 	std::shared_ptr<sf::RenderWindow> window_;
 	std::unique_ptr<View> view_;
+	int rotation_;
 
 public:
 	Game(const std::shared_ptr<sf::RenderWindow> & window);
