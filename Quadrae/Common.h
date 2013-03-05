@@ -22,7 +22,11 @@ namespace Time {
 };
 
 
-float frandom();
+namespace Random {
+	void seed();
+	float unitFloat();
+	int rangedInt(int min, int max);
+}
 
 
 #endif

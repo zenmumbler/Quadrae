@@ -11,7 +11,9 @@
 Game::Game(const std::shared_ptr<sf::RenderWindow> & window)
 	: window_(window)
 	, view_(new View(window_))
-{}
+{
+	Random::seed();
+}
 
 
 void Game::handleEvent(const sf::Event & event) {

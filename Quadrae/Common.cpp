@@ -7,14 +7,27 @@
 //
 
 #include <random>
+#include <chrono>
 #include "Common.h"
 
-static std::mt19937 randEngine;
-static std::uniform_real_distribution<float> normalDistribution { 0.0f, 1.0f };
+namespace Random {
+	static std::mt19937 randEngine;
+	static std::uniform_real_distribution<float> unitDist { 0.0f, 1.0f };
 
+	void seed() {
+		auto x = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+		randEngine.seed(static_cast<unsigned>(x));
+	}
 
-float frandom() {
-	return normalDistribution(randEngine);
+	float unitFloat() {
+		return unitDist(randEngine);
+	}
+	
+	int rangedInt(int min, int max) {
+		std::uniform_int_distribution<int> dist { min, max };
+		return dist(randEngine);
+	}
+	
 }
 
 
