@@ -68,11 +68,13 @@ void Quadrae::collapseCompletedLines() {
 ShapeGrid Quadrae::extractShapeGridAt(int x, int y) const {
 	unsigned long bits = 0;
 	
-	for (auto line = y; line <= y + 4; line++) {
+	for (auto line = y; line < y + 4; line++) {
 		unsigned long lineBits;
 
-		// provide all 1s above and below grid area
-		if (line < 0 || line >= height())
+		// extend all 0s above and 1s below grid area
+		if (line < 0)
+			lineBits = 0b0000;
+		else if (line >= height())
 			lineBits = 0b1111;
 		else
 			lineBits = (grid_[height() - line] >> (16 - 4 - x)).to_ulong();
@@ -93,5 +95,12 @@ bool Quadrae::canFitShapeAt(const ShapeGrid & shape, int x, int y) const {
 
 
 void Quadrae::placeShapeAt(const ShapeGrid & shape, int x, int y) {
-	
+	x += 3;
+
+	for (int row = y; row < y + 4; row++)
+		if (row >= 0 && row < height())
+			for (int col = x; col < x + 4; col++) {
+				if (col >= 3 && col <= 12 && testShapeAt(shape, col - x, row - y))
+					grid_[height() - row].set(15 - col);
+			}
 }

@@ -19,7 +19,8 @@ enum class ShapeType {
 	Square     = 3,
 	RightStair = 4,
 	LeftHook   = 5,
-	Bar        = 6
+	Bar        = 6,
+	None       = 7
 };
 
 using ShapeGrid = std::bitset<16>;
@@ -36,6 +37,7 @@ public:
 };
 
 
+bool testShapeAt(const ShapeGrid & type, int x, int y);
 ShapeGrid shapeWithRotation(ShapeType type, int rotation);
 
 

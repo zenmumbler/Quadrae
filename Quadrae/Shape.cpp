@@ -109,6 +109,11 @@ static std::vector<Shape> * createShapes() {
 }
 
 
+bool testShapeAt(const ShapeGrid & type, int x, int y) {
+	return type.test(15 - ((y * 4) + x));
+}
+
+
 ShapeGrid shapeWithRotation(ShapeType type, int rotation) {
 	static std::unique_ptr<std::vector<Shape>> allShapes_s;
 

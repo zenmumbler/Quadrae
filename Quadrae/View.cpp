@@ -28,8 +28,37 @@ void View::renderBG() {
 }
 
 
-void View::renderShape(const ShapeGrid & shape, float x, float y) {
-	auto tile = sf::Shape::Rectangle(x, y, x + 24., y + 24., sf::Color::Green);
+sf::Color colorForShapeType(const ShapeType st) {
+	switch (st) {
+		case ShapeType::TBone:
+			return sf::Color::Red;
+		case ShapeType::RightHook:
+			return sf::Color::Green;
+		case ShapeType::LeftStair:
+			return sf::Color::Blue;
+		case ShapeType::Square:
+			return sf::Color::Cyan;
+		case ShapeType::RightStair:
+			return sf::Color::Yellow;
+		case ShapeType::LeftHook:
+			return sf::Color::Magenta;
+		case ShapeType::Bar:
+			return sf::Color::White;
+		default:
+			break;
+	}
+
+	return sf::Color::Black;
+}
+
+
+void View::renderTile(ShapeType type, float x, float y) {
+	window_->Draw(sf::Shape::Rectangle(x, y, x + 24., y + 24., colorForShapeType(type)));
+}
+
+
+void View::renderShape(ShapeType type, const ShapeGrid & shape, float x, float y) {
+	auto tile = sf::Shape::Rectangle(x, y, x + 24., y + 24., colorForShapeType(type));
 	
 	for (int b = 15; b > -1; b--) {
 		if (shape.test(b))

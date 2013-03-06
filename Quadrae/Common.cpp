@@ -23,7 +23,7 @@ namespace Random {
 		return unitDist(randEngine);
 	}
 	
-	int rangedInt(int min, int max) {
+	int intInRange(int min, int max) {
 		std::uniform_int_distribution<int> dist { min, max };
 		return dist(randEngine);
 	}

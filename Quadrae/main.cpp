@@ -49,6 +49,8 @@ static void mainLoop() {
 static void init() {
 	window_.reset(new sf::RenderWindow(sf::VideoMode(400, 528), "Quadrae", sf::Style::Close));
 	game_.reset(new Game(window_));
+
+	window_->SetFramerateLimit(30);
 }
 
 

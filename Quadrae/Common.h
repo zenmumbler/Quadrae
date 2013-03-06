@@ -15,6 +15,7 @@
 namespace Time {
 	using Clock = std::chrono::high_resolution_clock;
 	using Point = Clock::time_point;
+	using Duration = std::chrono::milliseconds;
 	
 	void step();
 	Point now();
@@ -25,7 +26,7 @@ namespace Time {
 namespace Random {
 	void seed();
 	float unitFloat();
-	int rangedInt(int min, int max);
+	int intInRange(int min, int max);
 }
 
 
