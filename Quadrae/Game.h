@@ -10,6 +10,7 @@
 #define __Quadrae__Game__
 
 #include <SFML/Graphics.hpp>
+#include "Scene.h"
 #include "Common.h"
 #include "Quadrae.h"
 #include "View.h"
@@ -23,8 +24,7 @@ enum class Direction {
 };
 
 
-class Game {
-	std::shared_ptr<sf::RenderWindow> window_;
+class Game : public Scene {
 	std::unique_ptr<View> view_;
 	Quadrae grid_;
 	std::vector<std::vector<ShapeType>> gridTiles_;
@@ -37,14 +37,15 @@ class Game {
 	int pieceRot_, pieceRow_, pieceCol_;
 	
 	void placeShapeTiles(ShapeType type, const ShapeGrid & shape, int x, int y);
+	void handleCompletedLines();
 
 public:
 	Game(const std::shared_ptr<sf::RenderWindow> & window);
 	
-	void handleEvent(const sf::Event & event);
+	virtual void handleEvent(const sf::Event & event) override;
 
 	void tick();
-	void step();
+	virtual void frame() override;
 };
 
 

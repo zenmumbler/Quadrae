@@ -2,55 +2,60 @@
 // (c) 2013 by Arthur Langereis
 
 #include <memory>
+#include <vector>
 
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
 #include "Common.h"
+#include "Scene.h"
 #include "Game.h"
 
 
-static bool running_;
-static std::shared_ptr<sf::RenderWindow> window_;
-static std::unique_ptr<Game> game_;
+static bool running_s;
+static std::shared_ptr<sf::RenderWindow> window_s;
 
 
 static void handleEvents() {
 	sf::Event event;
 	
-	while (window_->GetEvent(event)) {
+	while (window_s->GetEvent(event)) {
 		if (event.Type == sf::Event::Closed)
-			running_ = false;
+			running_s = false;
 		
 		if (event.Type == sf::Event::KeyPressed) {
 			if (event.Key.Code == sf::Key::Escape)
-				running_ = false;
+				running_s = false;
 		}
 		
-		if (running_) // not handled by this method
-			game_->handleEvent(event);
+		if (running_s) // not handled by this method
+			Scenes::current()->handleEvent(event);
 	}
 }
 
 
 static void mainLoop() {
-	running_ = true;
+	running_s = true;
 	
-	while (running_) {
-		handleEvents();
+	while (running_s) {
 		Time::step();
-		game_->step();
-		window_->Display();
+		handleEvents();
+		Scenes::current()->frame();
+		window_s->Display();
 	}
 }
 
 
 static void init() {
-	window_.reset(new sf::RenderWindow(sf::VideoMode(400, 528), "Quadrae", sf::Style::Close));
-	game_.reset(new Game(window_));
-
-	window_->SetFramerateLimit(30);
+	// in SFML 1.x, the Window is the App, which is unfortunate
+	window_s.reset(new sf::RenderWindow(sf::VideoMode(400, 528), "Quadrae", sf::Style::Close));
+	window_s->SetFramerateLimit(60);
+	
+	// set up scenes
+	Scenes::add("game", std::make_shared<Game>(window_s));
+	Scenes::setCurrent("game");
+	
+	// misc
+	Random::seed();
 }
 
 
