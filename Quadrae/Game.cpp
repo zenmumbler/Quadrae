@@ -15,10 +15,8 @@ Game::Game(const std::shared_ptr<sf::RenderWindow> & window)
 	, gridTiles_(20)
 {
 	tickLength_ = Time::Duration(500);
-	nextTick_ = Time::now();
-	
 	piece_ = ShapeType::None;
-	
+
 	for (auto & gtLine : gridTiles_)
 		gtLine.resize(10, ShapeType::None);
 }
@@ -43,6 +41,10 @@ void Game::handleEvent(const sf::Event & event) {
 			tryRow++;
 			movedDown = true;
 		}
+
+		// ESC -> back to titles
+		else if (event.Key.Code == sf::Key::Escape)
+			Scenes::setCurrent("title");
 	}
 
 	if (piece_ != ShapeType::None && grid_.canFitShapeAt(shapeWithRotation(piece_, tryRot), tryCol, tryRow)) {
@@ -88,6 +90,21 @@ void Game::handleCompletedLines() {
 	for (auto & tline : gridTiles_)
 		if (completed(tline))
 			std::fill(tline.begin(), tline.end(), ShapeType::None);
+}
+
+
+void Game::activate() {
+	nextTick_ = Time::now();
+	piece_ = ShapeType::None;
+
+	grid_.clear();
+	for (auto & gtLine : gridTiles_)
+		std::fill(gtLine.begin(), gtLine.end(), ShapeType::None);
+}
+
+
+void Game::suspend() {
+	
 }
 
 

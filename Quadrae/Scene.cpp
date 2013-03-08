@@ -22,7 +22,11 @@ namespace Scenes {
 	}
 
 	void setCurrent(const std::string & name) {
+		if (! curScene_s.expired())
+			curScene_s.lock()->suspend();
+			
 		// will throw on bad key
 		curScene_s = scenes_s.at(name);
+		curScene_s.lock()->activate();
 	}
 }

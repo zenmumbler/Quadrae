@@ -45,6 +45,8 @@ public:
 	virtual void handleEvent(const sf::Event & event) override;
 
 	void tick();
+	virtual void activate() override;
+	virtual void suspend() override;
 	virtual void frame() override;
 };
 

@@ -8,6 +8,8 @@
 
 #include "Common.h"
 #include "Scene.h"
+
+#include "TitleScene.h"
 #include "Game.h"
 
 
@@ -21,11 +23,6 @@ static void handleEvents() {
 	while (window_s->GetEvent(event)) {
 		if (event.Type == sf::Event::Closed)
 			running_s = false;
-		
-		if (event.Type == sf::Event::KeyPressed) {
-			if (event.Key.Code == sf::Key::Escape)
-				running_s = false;
-		}
 		
 		if (running_s) // not handled by this method
 			Scenes::current()->handleEvent(event);
@@ -51,8 +48,9 @@ static void init() {
 	window_s->SetFramerateLimit(60);
 	
 	// set up scenes
+	Scenes::add("title", std::make_shared<Title>(window_s));
 	Scenes::add("game", std::make_shared<Game>(window_s));
-	Scenes::setCurrent("game");
+	Scenes::setCurrent("title");
 	
 	// misc
 	Random::seed();
