@@ -13,7 +13,15 @@ Title::Title(const std::shared_ptr<sf::RenderWindow> & window)
 	: Scene(window)
 	, view_(window)
 	, phase_(Phase::None)
-{}
+{
+	uint8_t _ = 0;
+
+	logo_ = { { 1,2,2,_,_,_,_,_,_,_,_,_,_,_,3,_,_,_,_,_,_,_,_,_,_,_,_,_ },
+              { 1,_,2,_,_,_,_,_,_,_,_,_,_,_,3,_,_,_,_,_,_,_,_,_,_,_,_,_ },
+              { 1,_,2,_,4,_,5,_,6,6,_,_,_,2,2,_,4,_,5,_,7,7,_,_,_,2,2,_ },
+              { 1,_,3,_,4,_,5,_,6,_,7,_,1,_,2,_,4,5,_,_,7,_,6,_,1,1,_,_ },
+              { _,3,3,3,_,5,5,_,_,7,7,_,1,1,1,_,4,_,_,_,_,6,6,_,_,1,1,_ } };
+}
 
 
 void Title::handleEvent(const sf::Event & event) {
@@ -44,25 +52,24 @@ void Title::activate() {
 
 
 void Title::suspend() {
-	
 }
 
 
 void Title::frame() {
 	window_->Clear({ 64, 64, 64 });
-	
+
 	if (Time::now() > nextAction_)
 		nextPhase();
-	
+
 	float letterPtc = 1.0f;
 	if (phase_ == Phase::LetterDrop) {
-		letterPtc = std::min(1.0f, Time::msSince(lastAction_) / 4000.f);
+		letterPtc = std::min(1.0f, Time::msSince(lastAction_) / 1000.f);
 		if (letterPtc == 1.0f)
 			nextPhase();
 	}
 
 	if (phase_ > Phase::Wait1)
-		view_.renderLetters(letterPtc);
+		view_.renderLetters(logo_, letterPtc);
 
 	if (phase_ == Phase::BlinkLoop) {
 		view_.renderCopyright();

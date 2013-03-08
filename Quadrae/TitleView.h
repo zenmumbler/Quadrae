@@ -21,9 +21,10 @@ class TitleView {
 public:
 	TitleView(const std::shared_ptr<sf::RenderWindow> & window);
 
-	void renderLetters(float percentage) const;
+	void renderLetters(const std::vector<std::vector<uint8_t>> & map, float percentage) const;
 	void renderCopyright() const;
 	void renderPressStart() const;
+	void renderLogoTile(float x, float y) const;
 };
 
 

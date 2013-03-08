@@ -10,8 +10,10 @@
 #define __Quadrae__TitleScene__
 
 #include <memory>
+#include <vector>
 #include <SFML/Graphics.hpp>
 #include "Common.h"
+#include "Shape.h"
 #include "Scene.h"
 #include "TitleView.h"
 
@@ -27,7 +29,9 @@ class Title : public Scene {
 
 	TitleView view_;
 	Phase phase_;
+	std::vector<std::vector<uint8_t>> logo_;
 	Time::Point lastAction_, nextAction_;
+	
 	
 	void nextPhase();
 
