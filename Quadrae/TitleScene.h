@@ -24,14 +24,13 @@ class Title : public Scene {
 		Wait1,
 		LetterDrop,
 		Wait2,
-		BlinkLoop
+		UILoop
 	};
 
 	TitleView view_;
 	Phase phase_;
 	std::vector<std::vector<uint8_t>> logo_;
 	Time::Point lastAction_, nextAction_;
-	
 	
 	void nextPhase();
 

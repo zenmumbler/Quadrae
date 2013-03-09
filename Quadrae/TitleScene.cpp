@@ -17,10 +17,10 @@ Title::Title(const std::shared_ptr<sf::RenderWindow> & window)
 	uint8_t _ = 0;
 
 	logo_ = { { 1,2,2,_,_,_,_,_,_,_,_,_,_,_,3,_,_,_,_,_,_,_,_,_,_,_,_,_ },
-              { 1,_,2,_,_,_,_,_,_,_,_,_,_,_,3,_,_,_,_,_,_,_,_,_,_,_,_,_ },
-              { 1,_,2,_,4,_,5,_,6,6,_,_,_,2,2,_,4,_,5,_,7,7,_,_,_,2,2,_ },
-              { 1,_,3,_,4,_,5,_,6,_,7,_,1,_,2,_,4,5,_,_,7,_,6,_,1,1,_,_ },
-              { _,3,3,3,_,5,5,_,_,7,7,_,1,1,1,_,4,_,_,_,_,6,6,_,_,1,1,_ } };
+			  { 1,_,2,_,_,_,_,_,_,_,_,_,_,_,3,_,_,_,_,_,_,_,_,_,_,_,_,_ },
+			  { 1,_,2,_,4,_,5,_,6,6,_,_,_,2,2,_,4,_,5,_,7,7,_,_,_,2,2,_ },
+			  { 1,_,3,_,4,_,5,_,6,_,7,_,1,_,2,_,4,5,_,_,7,_,6,_,1,1,_,_ },
+			  { _,3,3,3,_,5,5,_,_,7,7,_,1,1,1,_,4,_,_,_,_,6,6,_,_,1,1,_ } };
 }
 
 
@@ -39,7 +39,7 @@ void Title::nextPhase() {
 	if (phase_ == Phase::Wait1)
 		nextAction_ = lastAction_ + Time::Duration(1000);
 	else if (phase_ == Phase::Wait2)
-		nextAction_ = lastAction_ + Time::Duration(1000);
+		nextAction_ = lastAction_ + Time::Duration(750);
 	else
 		nextAction_ = Time::Point::max();
 }
@@ -56,7 +56,7 @@ void Title::suspend() {
 
 
 void Title::frame() {
-	window_->Clear({ 64, 64, 64 });
+	window_->Clear({ 64, 92, 64 });
 
 	if (Time::now() > nextAction_)
 		nextPhase();
@@ -71,7 +71,7 @@ void Title::frame() {
 	if (phase_ > Phase::Wait1)
 		view_.renderLetters(logo_, letterPtc);
 
-	if (phase_ == Phase::BlinkLoop) {
+	if (phase_ == Phase::UILoop) {
 		view_.renderCopyright();
 
 		if (Time::msSince(lastAction_) & 1024)
