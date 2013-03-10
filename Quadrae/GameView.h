@@ -1,5 +1,5 @@
 //
-//  View.h
+//  GameView.h
 //  Quadrae
 //
 //  Created by Arthur Langereis on 2/25/13.

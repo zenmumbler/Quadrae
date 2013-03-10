@@ -1,12 +1,12 @@
 //
-//  Game.cpp
+//  GameScene.cpp
 //  Quadrae
 //
 //  Created by Arthur Langereis on 2/25/13.
 //  Copyright (c) 2013 Arthur Langereis. All rights reserved.
 //
 
-#include "Game.h"
+#include "GameScene.h"
 
 Game::Game(const std::shared_ptr<sf::RenderWindow> & window)
 	: Scene(window)

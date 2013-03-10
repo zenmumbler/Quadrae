@@ -1,5 +1,5 @@
 //
-//  View.cpp
+//  GameView.cpp
 //  Quadrae
 //
 //  Created by Arthur Langereis on 2/25/13.
@@ -8,7 +8,7 @@
 
 #include <map>
 #include "Assets.h"
-#include "View.h"
+#include "GameView.h"
 
 View::View(const std::shared_ptr<sf::RenderWindow> & window)
 	: window_(window)

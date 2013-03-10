@@ -1,5 +1,5 @@
 //
-//  Game.h
+//  GameScene.h
 //  Quadrae
 //
 //  Created by Arthur Langereis on 2/25/13.
@@ -13,7 +13,7 @@
 #include "Scene.h"
 #include "Common.h"
 #include "Quadrae.h"
-#include "View.h"
+#include "GameView.h"
 
 enum class Direction {
 	None,

@@ -8,10 +8,9 @@
 
 #include "Common.h"
 #include "Assets.h"
-#include "Scene.h"
 
 #include "TitleScene.h"
-#include "Game.h"
+#include "GameScene.h"
 
 
 static bool running_s;

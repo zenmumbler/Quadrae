@@ -12,9 +12,9 @@
 		8E16B01616DBDCFF006BA148 /* sfml-graphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E16B01216DBDCFF006BA148 /* sfml-graphics.framework */; };
 		8E16B01716DBDCFF006BA148 /* sfml-system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E16B01316DBDCFF006BA148 /* sfml-system.framework */; };
 		8E16B01816DBDCFF006BA148 /* sfml-window.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E16B01416DBDCFF006BA148 /* sfml-window.framework */; };
-		8E16B01C16DBE87D006BA148 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B01A16DBE87D006BA148 /* Game.cpp */; };
+		8E16B01C16DBE87D006BA148 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B01A16DBE87D006BA148 /* GameScene.cpp */; };
 		8E16B02016DC30C8006BA148 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B01E16DC30C8006BA148 /* Common.cpp */; };
-		8E16B02316DC38D2006BA148 /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B02116DC38D2006BA148 /* View.cpp */; };
+		8E16B02316DC38D2006BA148 /* GameView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B02116DC38D2006BA148 /* GameView.cpp */; };
 		8E16B02616DC4210006BA148 /* Quadrae.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B02416DC4210006BA148 /* Quadrae.cpp */; };
 		8E6D2C1216E4F160008FCBFE /* Shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1016E4F160008FCBFE /* Shape.cpp */; };
 		8E6D2C1716E943E1008FCBFE /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1616E943E1008FCBFE /* Scene.cpp */; };
@@ -42,12 +42,12 @@
 		8E16B01216DBDCFF006BA148 /* sfml-graphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-graphics.framework"; path = "../../../Library/Frameworks/sfml-graphics.framework"; sourceTree = "<group>"; };
 		8E16B01316DBDCFF006BA148 /* sfml-system.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-system.framework"; path = "../../../Library/Frameworks/sfml-system.framework"; sourceTree = "<group>"; };
 		8E16B01416DBDCFF006BA148 /* sfml-window.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-window.framework"; path = "../../../Library/Frameworks/sfml-window.framework"; sourceTree = "<group>"; };
-		8E16B01A16DBE87D006BA148 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
-		8E16B01B16DBE87D006BA148 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		8E16B01A16DBE87D006BA148 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
+		8E16B01B16DBE87D006BA148 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		8E16B01E16DC30C8006BA148 /* Common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Common.cpp; sourceTree = "<group>"; };
 		8E16B01F16DC30C8006BA148 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
-		8E16B02116DC38D2006BA148 /* View.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = View.cpp; sourceTree = "<group>"; };
-		8E16B02216DC38D2006BA148 /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
+		8E16B02116DC38D2006BA148 /* GameView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameView.cpp; sourceTree = "<group>"; };
+		8E16B02216DC38D2006BA148 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
 		8E16B02416DC4210006BA148 /* Quadrae.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quadrae.cpp; sourceTree = "<group>"; };
 		8E16B02516DC4210006BA148 /* Quadrae.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quadrae.h; sourceTree = "<group>"; };
 		8E6D2C1016E4F160008FCBFE /* Shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shape.cpp; sourceTree = "<group>"; };
@@ -123,8 +123,8 @@
 		8E6D2C2116ED25ED008FCBFE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8E16B02116DC38D2006BA148 /* View.cpp */,
-				8E16B02216DC38D2006BA148 /* View.h */,
+				8E16B02116DC38D2006BA148 /* GameView.cpp */,
+				8E16B02216DC38D2006BA148 /* GameView.h */,
 				8E6D2C1B16E95D84008FCBFE /* TitleView.cpp */,
 				8E6D2C1C16E95D84008FCBFE /* TitleView.h */,
 			);
@@ -149,8 +149,8 @@
 				8E6D2C1416E93FCE008FCBFE /* Scene.h */,
 				8E6D2C1816E94B02008FCBFE /* TitleScene.cpp */,
 				8E6D2C1916E94B02008FCBFE /* TitleScene.h */,
-				8E16B01A16DBE87D006BA148 /* Game.cpp */,
-				8E16B01B16DBE87D006BA148 /* Game.h */,
+				8E16B01A16DBE87D006BA148 /* GameScene.cpp */,
+				8E16B01B16DBE87D006BA148 /* GameScene.h */,
 			);
 			name = "Scene Controllers";
 			sourceTree = "<group>";
@@ -207,9 +207,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E16B00916DBDCBA006BA148 /* main.cpp in Sources */,
-				8E16B01C16DBE87D006BA148 /* Game.cpp in Sources */,
+				8E16B01C16DBE87D006BA148 /* GameScene.cpp in Sources */,
 				8E16B02016DC30C8006BA148 /* Common.cpp in Sources */,
-				8E16B02316DC38D2006BA148 /* View.cpp in Sources */,
+				8E16B02316DC38D2006BA148 /* GameView.cpp in Sources */,
 				8E16B02616DC4210006BA148 /* Quadrae.cpp in Sources */,
 				8E6D2C1216E4F160008FCBFE /* Shape.cpp in Sources */,
 				8E6D2C1716E943E1008FCBFE /* Scene.cpp in Sources */,
