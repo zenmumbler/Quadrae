@@ -15,6 +15,9 @@ Game::Game(const std::shared_ptr<sf::RenderWindow> & window)
 	tickInterval_  = Time::Duration(500);
 	horizInterval_ = Time::Duration(200);
 	dropInterval_  = Time::Duration(50);
+	
+	level_ = 0;
+	lines_ = 0;
 
 	piece_ = ShapeType::None;
 	nextPiece_ = ShapeType::None;
@@ -29,14 +32,16 @@ void Game::activate() {
 	piece_ = ShapeType::None;
 	nextPiece_ = randomShapeType();
 	direction_ = Direction::None;
-	
+
+	level_ = 0; // <-- get this from shared config
+	lines_ = 0;
+
 	grid_.clear();
 }
 
 
 void Game::suspend() {
 }
-
 
 
 void Game::handleEvent(const sf::Event & event) {
@@ -129,7 +134,9 @@ void Game::handleCompletedLines() {
 	auto cl = grid_.completedLines();
 	if (! cl.size())
 		return;
+
 	grid_.collapseCompletedLines();
+	lines_ += cl.size();
 }
 
 
@@ -196,4 +203,6 @@ void Game::frame() {
 	
 	if (nextPiece_ != ShapeType::None)
 		view_->renderShape(shapeWithRotation(nextPiece_, 0), 300.f, 50.f);
+
+	view_->renderLineCounter(lines_);
 }

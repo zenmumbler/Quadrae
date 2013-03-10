@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Common.h"
+#include "Assets.h"
 #include "Scene.h"
 
 #include "TitleScene.h"
@@ -42,10 +43,14 @@ static void mainLoop() {
 }
 
 
-static void init() {
+static bool init() {
 	// in SFML 1.x, the Window is the App, which is unfortunate
 	window_s.reset(new sf::RenderWindow(sf::VideoMode(400, 528), "Quadrae", sf::Style::Close));
 	window_s->SetFramerateLimit(60);
+	
+	// try and load assets
+	if (! Assets::loadAll())
+		return false;
 	
 	// set up scenes
 	Scenes::add("title", std::make_shared<Title>(window_s));
@@ -54,10 +59,12 @@ static void init() {
 	
 	// misc
 	Random::seed();
+	
+	return true;
 }
 
 
 int main(int argc, const char * argv[]) {
-	init();
-	mainLoop();
+	if (init())
+		mainLoop();
 }

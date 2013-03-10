@@ -20,6 +20,7 @@
 		8E6D2C1716E943E1008FCBFE /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1616E943E1008FCBFE /* Scene.cpp */; };
 		8E6D2C1A16E94B02008FCBFE /* TitleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1816E94B02008FCBFE /* TitleScene.cpp */; };
 		8E6D2C1D16E95D84008FCBFE /* TitleView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1B16E95D84008FCBFE /* TitleView.cpp */; };
+		8E6D2C2016ED2009008FCBFE /* Assets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1E16ED2009008FCBFE /* Assets.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +58,8 @@
 		8E6D2C1916E94B02008FCBFE /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScene.h; sourceTree = "<group>"; };
 		8E6D2C1B16E95D84008FCBFE /* TitleView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TitleView.cpp; sourceTree = "<group>"; };
 		8E6D2C1C16E95D84008FCBFE /* TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleView.h; sourceTree = "<group>"; };
+		8E6D2C1E16ED2009008FCBFE /* Assets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Assets.cpp; sourceTree = "<group>"; };
+		8E6D2C1F16ED2009008FCBFE /* Assets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Assets.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,8 @@
 			children = (
 				8E16B01E16DC30C8006BA148 /* Common.cpp */,
 				8E16B01F16DC30C8006BA148 /* Common.h */,
+				8E6D2C1E16ED2009008FCBFE /* Assets.cpp */,
+				8E6D2C1F16ED2009008FCBFE /* Assets.h */,
 				8E6D2C1016E4F160008FCBFE /* Shape.cpp */,
 				8E6D2C1116E4F160008FCBFE /* Shape.h */,
 				8E16B02416DC4210006BA148 /* Quadrae.cpp */,
@@ -186,6 +191,7 @@
 				8E6D2C1716E943E1008FCBFE /* Scene.cpp in Sources */,
 				8E6D2C1A16E94B02008FCBFE /* TitleScene.cpp in Sources */,
 				8E6D2C1D16E95D84008FCBFE /* TitleView.cpp in Sources */,
+				8E6D2C2016ED2009008FCBFE /* Assets.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

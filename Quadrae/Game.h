@@ -34,6 +34,8 @@ class Game : public Scene {
 	Direction direction_;
 	int pieceRot_, pieceRow_, pieceCol_;
 	
+	int level_, lines_;
+	
 	sf::Key::Code lastKeyPressed_;
 	
 	void handleCompletedLines();

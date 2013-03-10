@@ -6,14 +6,13 @@
 //  Copyright (c) 2013 Arthur Langereis. All rights reserved.
 //
 
-#include "TitleView.h"
 #include <cmath>
+#include "Assets.h"
+#include "TitleView.h"
 
 TitleView::TitleView(const std::shared_ptr<sf::RenderWindow> & window)
 	: window_(window)
-{
-	font_.LoadFromFile("/Library/Fonts/Arial.ttf");
-}
+{}
 
 
 void TitleView::renderLetters(const std::vector<std::vector<uint8_t>> & map, float percentage) const {
@@ -42,7 +41,7 @@ void TitleView::renderLetters(const std::vector<std::vector<uint8_t>> & map, flo
 
 
 void TitleView::renderCopyright() const {
-	sf::String copy { "(c) 2013 by Arthur Langereis", font_, 12.f };
+	sf::String copy { "(c) 2013 by Arthur Langereis", Assets::font(), 12.f };
 	copy.SetColor(sf::Color::White);
 	copy.SetCenter(copy.GetRect().GetWidth() / 2.f, copy.GetRect().GetHeight());
 	copy.SetPosition(200.f, 515.f);
@@ -52,7 +51,7 @@ void TitleView::renderCopyright() const {
 
 
 void TitleView::renderPressStart() const {
-	sf::String act { "Press Return To Start", font_, 24.f };
+	sf::String act { "Press Return To Start", Assets::font(), 24.f };
 	act.SetColor(sf::Color::White);
 	act.SetCenter(act.GetRect().GetWidth() / 2.f, act.GetRect().GetHeight());
 	act.SetPosition(200.f, 375.f);

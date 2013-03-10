@@ -6,15 +6,13 @@
 //  Copyright (c) 2013 Arthur Langereis. All rights reserved.
 //
 
-#include "View.h"
 #include <map>
+#include "Assets.h"
+#include "View.h"
 
 View::View(const std::shared_ptr<sf::RenderWindow> & window)
 	: window_(window)
-{
-	texture_.LoadFromFile("texture.png");
-	texture_.SetSmooth(false);
-}
+{}
 
 /*
  
@@ -24,7 +22,7 @@ View::View(const std::shared_ptr<sf::RenderWindow> & window)
  
  */
 
-void View::renderBG() {
+void View::renderBG() const {
 	window_->Clear();
 	
 	auto border = sf::Shape::Rectangle(23, 23, 23 + 242, 23 + 482, { 32,32,32 }, 1.f, sf::Color::White);
@@ -52,8 +50,8 @@ static sf::IntRect texRectForTile(const Tile t) {
 }
 
 
-void View::renderTile(const Tile & tile, float x, float y) {
-	sf::Sprite ts { texture_, { x + 12.f, y + 12.f } };
+void View::renderTile(const Tile & tile, float x, float y) const {
+	sf::Sprite ts { Assets::tileTexture(), { x + 12.f, y + 12.f } };
 	ts.SetSubRect(texRectForTile(tile));
 	ts.SetCenter(12.f, 12.f);
 	ts.SetRotation(-90.f * tile.rotation());
@@ -61,7 +59,7 @@ void View::renderTile(const Tile & tile, float x, float y) {
 }
 
 
-void View::renderShape(const Shape & shape, float x, float y) {
+void View::renderShape(const Shape & shape, float x, float y) const {
 	for (auto row = 0u; row < shape.rows(); row++) {
 		for (auto col = 0u; col < shape.cols(); col++) {
 			Tile tile = shape.at(col, row);
@@ -69,4 +67,9 @@ void View::renderShape(const Shape & shape, float x, float y) {
 				renderTile(tile, x + (col * 24.f), y + (row * 24.f));
 		}
 	}
+}
+
+
+void View::renderLineCounter(int lines) const {
+	
 }

@@ -16,7 +16,6 @@
 
 class TitleView {
 	std::shared_ptr<sf::RenderWindow> window_;
-	sf::Font font_;
 	
 public:
 	TitleView(const std::shared_ptr<sf::RenderWindow> & window);

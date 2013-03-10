@@ -16,15 +16,15 @@
 
 class View {
 	std::shared_ptr<sf::RenderWindow> window_;
-	sf::Image texture_;
 
 public:
 	View(const std::shared_ptr<sf::RenderWindow> & window);
 
-	void renderBG();
-	void renderShape(const Shape & shape, float x, float y);
+	void renderBG() const;
+	void renderShape(const Shape & shape, float x, float y) const;
 
-	void renderTile(const Tile & tile, float x, float y);
+	void renderTile(const Tile & tile, float x, float y) const;
+	void renderLineCounter(int lines) const;
 };
 
 #endif /* defined(__Quadrae__View__) */
