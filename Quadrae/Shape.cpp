@@ -49,7 +49,7 @@ Shape Shape::rotateCW(int pivotX, int pivotY) const {
 			if (dx < 0 || dx > xmax || dy < 0 || dy > ymax)
 				continue;
 			
-			Tile tile = at(sx, sy);
+			auto tile = at(sx, sy);
 			if (tile.occupied()) {
 				tile.setRotation(tile.rotation() + 1);
 				out.at(dx, dy) = tile;
@@ -66,18 +66,22 @@ Shape Shape::rotateCW(int pivotX, int pivotY) const {
 static std::pair<ShapeType,std::vector<Shape>>
 genShapes(ShapeType type, const Shape & segs, int pivotX, int pivotY, int numRotations)
 {
+	// input: segment index + 1 in type part, move that over and
+	// add in the specified ShapeType
 	Shape base { segs };
 	for (auto & row : base)
 		for (Tile & t : row)
 			if (t.occupied())
 				t.setSegment((uint8_t)t.type() - 1).setType(type);
 
+	// starting with the just converted base, add n-1 rotations
+	// over px,py to the shape list
 	std::vector<Shape> shapes { base };
 
 	for (int n = 0; n < numRotations - 1; n++)
 		shapes.push_back(shapes.back().rotateCW(pivotX, pivotY));
 	
-	return std::make_pair(type, shapes);
+	return { type, shapes };
 }
 
 
