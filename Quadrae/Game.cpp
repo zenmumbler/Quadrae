@@ -17,6 +17,7 @@ Game::Game(const std::shared_ptr<sf::RenderWindow> & window)
 	dropInterval_  = Time::Duration(50);
 
 	piece_ = ShapeType::None;
+	nextPiece_ = ShapeType::None;
 }
 
 
@@ -26,6 +27,7 @@ void Game::activate() {
 	nextDropMove_ = nextTick_;
 
 	piece_ = ShapeType::None;
+	nextPiece_ = randomShapeType();
 	direction_ = Direction::None;
 	
 	grid_.clear();
@@ -131,11 +133,20 @@ void Game::handleCompletedLines() {
 }
 
 
+void Game::nextPiece() {
+	piece_ = nextPiece_;
+	nextPiece_ = randomShapeType();
+	
+	pieceRow_ = -1; pieceCol_ = 3;
+	pieceRot_ = 40000;
+}
+
+
 void Game::tick() {
 	if (piece_ == ShapeType::None) {
-		piece_ = static_cast<ShapeType>(Random::intInRange(1, 7));
-		pieceRow_ = -1; pieceCol_ = 3;
-		pieceRot_ = 40000;
+		// piece is None at start to allow for 1 tick pause
+		// before gameplay
+		nextPiece();
 	}
 	else {
 		auto & shape = shapeWithRotation(piece_, pieceRot_);
@@ -144,7 +155,7 @@ void Game::tick() {
 			pieceRow_++;
 		else {
 			grid_.placeShapeAt(shape, pieceCol_, pieceRow_);
-			piece_ = ShapeType::None;
+			nextPiece();
 			
 			handleCompletedLines();
 		}
@@ -153,13 +164,13 @@ void Game::tick() {
 
 
 void Game::frame() {
-	// first allow player input to move piece
-	// then process any forced down movement in the tick
-	// this to allow for last moment movements
-	// these 2 checks are only for continuous moves, i.e.
-	// the player keeps the key down for an amount of time
-	// the initial move is always handled immediately in
-	// the event handler
+	// First allow player input to move piece
+	// then process any forced down movement in the tick.
+	// This is to allow for last moment movements.
+	// These 2 checks are only for continuous moves, i.e.
+	// the player keeps the key down for an amount of time.
+	// The initial move is always performed immediately in
+	// the event handler.
 	if (Time::now() >= nextHorizMove_) {
 		if (direction_ == Direction::Left || direction_ == Direction::Right)
 			tryMove(direction_);
@@ -182,4 +193,7 @@ void Game::frame() {
 	
 	if (piece_ != ShapeType::None)
 		view_->renderShape(shapeWithRotation(piece_, pieceRot_), 24. * (pieceCol_ + 1), 24. * (pieceRow_ + 1));
+	
+	if (nextPiece_ != ShapeType::None)
+		view_->renderShape(shapeWithRotation(nextPiece_, 0), 300.f, 50.f);
 }

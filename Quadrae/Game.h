@@ -30,7 +30,7 @@ class Game : public Scene {
 	Time::Duration tickInterval_, horizInterval_, dropInterval_;
 	Time::Point nextTick_, nextHorizMove_, nextDropMove_;
 
-	ShapeType piece_;
+	ShapeType piece_, nextPiece_;
 	Direction direction_;
 	int pieceRot_, pieceRow_, pieceCol_;
 	
@@ -40,6 +40,7 @@ class Game : public Scene {
 
 	void tryRotate(bool clockwise);
 	void tryMove(Direction dir);
+	void nextPiece();
 
 public:
 	Game(const std::shared_ptr<sf::RenderWindow> & window);
