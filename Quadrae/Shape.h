@@ -63,8 +63,8 @@ public:
 	Tile & at(size_t col, size_t row);
 	Tile at(size_t col, size_t row) const;
 
-	Row & row(size_t row) { return data_.at(row); };
-	const Row & row(size_t row) const { return data_.at(row); };
+	Row & row(size_t row) { return data_.at(row); }
+	const Row & row(size_t row) const { return data_.at(row); }
 
 	Shape rotateCW(int pivotX, int pivotY) const;
 	

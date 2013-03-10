@@ -7,10 +7,14 @@
 //
 
 #include "View.h"
+#include <map>
 
 View::View(const std::shared_ptr<sf::RenderWindow> & window)
 	: window_(window)
-{}
+{
+	texture_.LoadFromFile("texture.png");
+	texture_.SetSmooth(false);
+}
 
 /*
  
@@ -28,38 +32,38 @@ void View::renderBG() {
 }
 
 
-sf::Color colorForTile(const Tile t) {
-	switch (t.type()) {
-		case ShapeType::TBone:
-			return sf::Color::Red;
-		case ShapeType::RightHook:
-			return sf::Color::Green;
-		case ShapeType::LeftStair:
-			return sf::Color::Blue;
-		case ShapeType::Square:
-			return sf::Color::Cyan;
-		case ShapeType::RightStair:
-			return sf::Color::Yellow;
-		case ShapeType::LeftHook:
-			return sf::Color::Magenta;
-		case ShapeType::Bar:
-			return sf::Color::White;
-		default:
-			break;
+static sf::IntRect texRectForTile(const Tile t) {
+	static std::map<ShapeType, std::vector<sf::Vector2i>> tileUV_s;
+	
+	if (tileUV_s.size() == 0) {
+		tileUV_s.insert({ ShapeType::None,       { { 0,3 }, { 0,3 }, { 0,3 }, { 0,3 } } });
+		tileUV_s.insert({ ShapeType::TBone,      { { 1,4 }, { 2,4 }, { 3,4 }, { 2,5 } } });
+		tileUV_s.insert({ ShapeType::RightHook,  { { 0,0 }, { 1,0 }, { 2,0 }, { 2,1 } } });
+		tileUV_s.insert({ ShapeType::LeftStair,  { { 3,3 }, { 4,3 }, { 4,4 }, { 5,4 } } });
+		tileUV_s.insert({ ShapeType::Square,     { { 0,1 }, { 1,1 }, { 0,2 }, { 1,2 } } });
+		tileUV_s.insert({ ShapeType::RightStair, { { 3,1 }, { 4,1 }, { 4,0 }, { 5,0 } } });
+		tileUV_s.insert({ ShapeType::LeftHook,   { { 0,4 }, { 0,3 }, { 1,3 }, { 2,3 } } });
+		tileUV_s.insert({ ShapeType::Bar,        { { 2,2 }, { 3,2 }, { 4,2 }, { 5,2 } } });
 	}
+	
+	auto txy = tileUV_s[t.type()][t.segment()];
 
-	return sf::Color::Black;
+	return { txy.x * 24, txy.y * 24, (txy.x + 1) * 24, (txy.y + 1) * 24 };
 }
 
 
 void View::renderTile(const Tile & tile, float x, float y) {
-	window_->Draw(sf::Shape::Rectangle(x, y, x + 24., y + 24., colorForTile(tile)));
+	sf::Sprite ts { texture_, { x + 12.f, y + 12.f } };
+	ts.SetSubRect(texRectForTile(tile));
+	ts.SetCenter(12.f, 12.f);
+	ts.SetRotation(-90.f * tile.rotation());
+	window_->Draw(ts);
 }
 
 
 void View::renderShape(const Shape & shape, float x, float y) {
-	for (int row = 0; row < shape.rows(); row++) {
-		for (int col = 0; col < shape.cols(); col++) {
+	for (auto row = 0u; row < shape.rows(); row++) {
+		for (auto col = 0u; col < shape.cols(); col++) {
 			Tile tile = shape.at(col, row);
 			if (tile.occupied())
 				renderTile(tile, x + (col * 24.f), y + (row * 24.f));

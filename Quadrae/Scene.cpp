@@ -9,6 +9,10 @@
 #include <unordered_map>
 #include "Scene.h"
 
+void Scene::activate() {}
+void Scene::suspend() {}
+
+
 namespace Scenes {
 	static std::unordered_map<std::string, std::shared_ptr<Scene>> scenes_s;
 	static std::weak_ptr<Scene> curScene_s;

@@ -25,8 +25,8 @@ public:
 
 	virtual void handleEvent(const sf::Event & event) = 0;
 
-	virtual void activate() {}
-	virtual void suspend() {}
+	virtual void activate();
+	virtual void suspend();
 	virtual void frame() = 0;
 };
 

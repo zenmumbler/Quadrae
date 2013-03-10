@@ -127,8 +127,8 @@ const Shape & shapeWithRotation(ShapeType type, size_t rotation) {
 		allShapes_s.insert(genShapes(ShapeType::RightStair, shp, 0, 0, 2));
 
 		shp = { { 0,0,0,0 },
-				{ 1,2,3,0 },
-				{ 4,0,0,0 },
+				{ 2,3,4,0 },
+				{ 1,0,0,0 },
 				{ 0,0,0,0 } };
 		allShapes_s.insert(genShapes(ShapeType::LeftHook, shp, 1, 1, 4));
 

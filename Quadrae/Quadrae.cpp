@@ -74,7 +74,7 @@ bool Quadrae::canFitShapeAt(const Shape & shape, int col, int row) const {
 	for (int y = row; y < row + (int)shape.rows(); y++)
 		for (int x = col; x < col + (int)shape.cols(); x++) {
 			if (shape.at(x - col, y - row).occupied()) {
-				if (x < 0 || x >= grid_.cols() || y >= grid_.rows())
+				if (x < 0 || x >= (int)grid_.cols() || y >= (int)grid_.rows())
 					return false;
 				if (y >= 0 && grid_.at(x, y).occupied())
 					return false;
@@ -86,9 +86,9 @@ bool Quadrae::canFitShapeAt(const Shape & shape, int col, int row) const {
 
 void Quadrae::placeShapeAt(const Shape & shape, int col, int row) {
 	for (int y = row; y < row + (int)shape.rows(); y++)
-		if (y >= 0 && y < grid_.rows())
+		if (y >= 0 && y < (int)grid_.rows())
 			for (int x = col; x < col + (int)shape.cols(); x++) {
-				if (x >= 0 && x < grid_.cols() && shape.at(x - col, y - row).occupied())
+				if (x >= 0 && x < (int)grid_.cols() && shape.at(x - col, y - row).occupied())
 					grid_.at(x, y) = shape.at(x - col, y - row);
 			}
 }

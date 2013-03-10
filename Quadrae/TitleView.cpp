@@ -21,7 +21,7 @@ void TitleView::renderLetters(const std::vector<std::vector<uint8_t>> & map, flo
 	
 	auto ease = [](float ptc) { return ptc * ptc; };
 
-	for (int row = 0; row < map.size(); row++) {
+	for (auto row = 0u; row < map.size(); row++) {
 		const auto line = map[(int)map.size() - 1 - row];
 
 		const float fromPtc = linePtcSeg * row,
@@ -33,7 +33,7 @@ void TitleView::renderLetters(const std::vector<std::vector<uint8_t>> & map, flo
 		if (percentage < fromPtc)
 			continue;
 
-		for (int col = 0; col < line.size() - 1; col++) {
+		for (auto col = 0u; col < line.size() - 1; col++) {
 			if (line[col])
 				renderLogoTile(38.f + (col * 12.f), curY);
 		}

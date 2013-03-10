@@ -16,6 +16,7 @@
 
 class View {
 	std::shared_ptr<sf::RenderWindow> window_;
+	sf::Image texture_;
 
 public:
 	View(const std::shared_ptr<sf::RenderWindow> & window);
