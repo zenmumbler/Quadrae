@@ -71,5 +71,10 @@ void View::renderShape(const Shape & shape, float x, float y) const {
 
 
 void View::renderLineCounter(int lines) const {
+	sf::String copy { std::to_string(lines), Assets::font(), 36.f };
+	copy.SetColor(sf::Color::White);
+	copy.SetCenter(copy.GetRect().GetWidth() / 2.f, copy.GetRect().GetHeight());
+	copy.SetPosition(344.f, 400.f);
 	
+	window_->Draw(copy);
 }

@@ -101,20 +101,9 @@
 				8E16B01F16DC30C8006BA148 /* Common.h */,
 				8E6D2C1E16ED2009008FCBFE /* Assets.cpp */,
 				8E6D2C1F16ED2009008FCBFE /* Assets.h */,
-				8E6D2C1016E4F160008FCBFE /* Shape.cpp */,
-				8E6D2C1116E4F160008FCBFE /* Shape.h */,
-				8E16B02416DC4210006BA148 /* Quadrae.cpp */,
-				8E16B02516DC4210006BA148 /* Quadrae.h */,
-				8E16B02116DC38D2006BA148 /* View.cpp */,
-				8E16B02216DC38D2006BA148 /* View.h */,
-				8E16B01A16DBE87D006BA148 /* Game.cpp */,
-				8E16B01B16DBE87D006BA148 /* Game.h */,
-				8E6D2C1B16E95D84008FCBFE /* TitleView.cpp */,
-				8E6D2C1C16E95D84008FCBFE /* TitleView.h */,
-				8E6D2C1816E94B02008FCBFE /* TitleScene.cpp */,
-				8E6D2C1916E94B02008FCBFE /* TitleScene.h */,
-				8E6D2C1616E943E1008FCBFE /* Scene.cpp */,
-				8E6D2C1416E93FCE008FCBFE /* Scene.h */,
+				8E6D2C2216ED260A008FCBFE /* Models */,
+				8E6D2C2116ED25ED008FCBFE /* Views */,
+				8E6D2C2316ED2636008FCBFE /* Scene Controllers */,
 				8E16B00816DBDCBA006BA148 /* main.cpp */,
 			);
 			path = Quadrae;
@@ -129,6 +118,41 @@
 				8E16B01416DBDCFF006BA148 /* sfml-window.framework */,
 			);
 			name = SFML;
+			sourceTree = "<group>";
+		};
+		8E6D2C2116ED25ED008FCBFE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8E16B02116DC38D2006BA148 /* View.cpp */,
+				8E16B02216DC38D2006BA148 /* View.h */,
+				8E6D2C1B16E95D84008FCBFE /* TitleView.cpp */,
+				8E6D2C1C16E95D84008FCBFE /* TitleView.h */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		8E6D2C2216ED260A008FCBFE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8E6D2C1016E4F160008FCBFE /* Shape.cpp */,
+				8E6D2C1116E4F160008FCBFE /* Shape.h */,
+				8E16B02416DC4210006BA148 /* Quadrae.cpp */,
+				8E16B02516DC4210006BA148 /* Quadrae.h */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		8E6D2C2316ED2636008FCBFE /* Scene Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8E6D2C1616E943E1008FCBFE /* Scene.cpp */,
+				8E6D2C1416E93FCE008FCBFE /* Scene.h */,
+				8E6D2C1816E94B02008FCBFE /* TitleScene.cpp */,
+				8E6D2C1916E94B02008FCBFE /* TitleScene.h */,
+				8E16B01A16DBE87D006BA148 /* Game.cpp */,
+				8E16B01B16DBE87D006BA148 /* Game.h */,
+			);
+			name = "Scene Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
