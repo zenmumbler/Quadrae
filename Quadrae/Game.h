@@ -19,7 +19,6 @@ enum class Direction {
 	None,
 	Left,
 	Right,
-	Down,
 	Drop
 };
 
@@ -28,14 +27,19 @@ class Game : public Scene {
 	std::unique_ptr<View> view_;
 	Quadrae grid_;
 
-	Time::Duration tickLength_;
-	Time::Point nextTick_;
+	Time::Duration tickInterval_, horizInterval_, dropInterval_;
+	Time::Point nextTick_, nextHorizMove_, nextDropMove_;
 
 	ShapeType piece_;
 	Direction direction_;
 	int pieceRot_, pieceRow_, pieceCol_;
 	
+	sf::Key::Code lastKeyPressed_;
+	
 	void handleCompletedLines();
+
+	void tryRotate(bool clockwise);
+	void tryMove(Direction dir);
 
 public:
 	Game(const std::shared_ptr<sf::RenderWindow> & window);
