@@ -9,29 +9,37 @@
 #include <algorithm>
 #include "Quadrae.h"
 
-const unsigned long kEmptyPaddedLine     = 0b1110000000000111;
-const unsigned long kCompletedPaddedLine = 0b1111111111111111;
+
+// util funcs
+static bool completed(const Shape::Row & row) {
+	return std::all_of(row.begin(), row.end(), [](const Tile & t){ return t.occupied(); });
+}
 
 
-Quadrae::Quadrae(int gridHeight)
-	: grid_(gridHeight, kEmptyPaddedLine)
+static void clearLine(Shape::Row & line) {
+	std::fill(line.begin(), line.end(), 0);
+}
+
+
+// Quadrae class
+Quadrae::Quadrae()
+	: grid_(10, 20)
 {}
 
 
 void Quadrae::clear() {
 	for (auto & line : grid_)
-		line = kEmptyPaddedLine;
+		clearLine(line);
 }
 
 
-void Quadrae::setLine(int lineNr, const std::bitset<10> & line) {
-	unsigned long paddedLine = kEmptyPaddedLine | (line.to_ulong() << 3);
-	grid_.at(height() - lineNr - 1) = paddedLine;
+void Quadrae::setLine(int lineNr, const Shape::Row & line) {
+	grid_.row(lineNr) = line;
 }
 
 
-Quadrae::Row Quadrae::getLine(int lineNr) const {
-	return { grid_.at(height() - lineNr - 1).to_ulong() >> 3 };
+Shape::Row Quadrae::getLine(int lineNr) const {
+	return grid_.row(lineNr);
 }
 
 
@@ -40,8 +48,8 @@ std::vector<int> Quadrae::completedLines() const {
 	int lineNr = 0;
 
 	for (const auto & line : grid_) {
-		if (line.to_ulong() == kCompletedPaddedLine)
-			lines.push_back(height() - lineNr - 1);
+		if (completed(line))
+			lines.push_back(lineNr);
 		lineNr++;
 	}
 	
@@ -50,57 +58,37 @@ std::vector<int> Quadrae::completedLines() const {
 
 
 void Quadrae::collapseCompletedLines() {
-	auto completed = completedLines();
-	using Line = std::bitset<16>;
-
 	// shift the completed lines beyond the normal ones but preserve order of normal lines
-	std::stable_sort(grid_.begin(), grid_.end(), [](const Line & a, const Line & b) {
-		return (a != kCompletedPaddedLine) && (b == kCompletedPaddedLine);
+	std::stable_sort(grid_.begin(), grid_.end(), [](const Shape::Row & a, const Shape::Row & b) {
+		return completed(a) && !completed(b);
 	});
 	
 	// clear the completed lines
 	for (auto & line : grid_)
-		if (line.to_ulong() == kCompletedPaddedLine)
-			line = kEmptyPaddedLine;
+		if (completed(line))
+			clearLine(line);
 }
 
 
-ShapeGrid Quadrae::extractShapeGridAt(int x, int y) const {
-	unsigned long bits = 0;
-	
-	for (auto line = y; line < y + 4; line++) {
-		unsigned long lineBits;
-
-		// extend all 0s above and 1s below grid area
-		if (line < 0)
-			lineBits = 0b0000;
-		else if (line >= height())
-			lineBits = 0b1111;
-		else
-			lineBits = (grid_[height() - line - 1] >> (16 - 4 - x)).to_ulong();
-		
-		bits <<= 4;
-		bits |= lineBits & 0b1111;
-	}
-
-	return bits;
+bool Quadrae::canFitShapeAt(const Shape & shape, int col, int row) const {
+	for (int y = row; y < row + (int)shape.rows(); y++)
+		for (int x = col; x < col + (int)shape.cols(); x++) {
+			if (shape.at(x - col, y - row).occupied()) {
+				if (x < 0 || x >= grid_.cols() || y >= grid_.rows())
+					return false;
+				if (y >= 0 && grid_.at(x, y).occupied())
+					return false;
+			}
+		}
+	return true;
 }
 
 
-bool Quadrae::canFitShapeAt(const ShapeGrid & shape, int x, int y) const {
-	// in x-coord is Row-based, offset by left padding
-	auto section = extractShapeGridAt(x + 3, y);
-	return (shape & section).none();
-}
-
-
-void Quadrae::placeShapeAt(const ShapeGrid & shape, int x, int y) {
-	x += 3;
-
-	for (int row = y; row < y + 4; row++)
-		if (row >= 0 && row < height())
-			for (int col = x; col < x + 4; col++) {
-				if (col >= 3 && col <= 12 && testShapeAt(shape, col - x, row - y))
-					grid_[height() - row - 1].set(15 - col);
+void Quadrae::placeShapeAt(const Shape & shape, int col, int row) {
+	for (int y = row; y < row + (int)shape.rows(); y++)
+		if (y >= 0 && y < grid_.rows())
+			for (int x = col; x < col + (int)shape.cols(); x++) {
+				if (x >= 0 && x < grid_.cols() && shape.at(x - col, y - row).occupied())
+					grid_.at(x, y) = shape.at(x - col, y - row);
 			}
 }

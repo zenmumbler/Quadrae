@@ -7,118 +7,134 @@
 //
 
 #include <memory>
+#include <map>
 #include "Shape.h"
 
-static ShapeGrid rotateCW(const ShapeGrid & field, int px, int py) {
-	ShapeGrid out;
+Shape::Shape(size_t cols, size_t rows)
+	: data_(rows)
+{
+	for (auto & row : data_)
+		row.resize(cols);
+}
+
+
+Tile & Shape::at(size_t col, size_t row) {
+	return data_.at(row).at(col);
+}
+
+
+Tile Shape::at(size_t col, size_t row) const {
+	return data_.at(row).at(col);
+}
+
+
+Shape Shape::rotateCW(int pivotX, int pivotY) const {
+	Shape out { cols(), rows() };
 	int dx, dy;
+	int w = static_cast<int>(cols()), h = static_cast<int>(rows());
+	int xmax = w - 1, ymax = h - 1;
 	
-	for (int sy = 0; sy < 4; sy++)
-		for (int sx = 0; sx < 4; ++sx) {
-			// px, py == 0, 0 means rotate around center (1.5, 1.5)
-			if (px == 0 && py == 0) {
-				dx = 3 - sy;
+	for (int sy = 0; sy < h; sy++)
+		for (int sx = 0; sx < w; ++sx) {
+			// px, py == 0, 0 means rotate around center
+			if (pivotX == 0 && pivotY == 0) {
+				dx = ymax - sy;
 				dy = sx;
 			}
 			else {
-				dx = 3 - sy - (3 - (px + py));
-				dy = sx - (px - py);
+				dx = ymax - sy - (ymax - (pivotX + pivotY));
+				dy = sx - (pivotX - pivotY);
 			}
 			
-			if (dx < 0 || dx > 3 || dy < 0 || dy > 3)
+			if (dx < 0 || dx > xmax || dy < 0 || dy > ymax)
 				continue;
 			
-			if (field[(sy * 4) + sx])
-				out.set((dy * 4) + dx);
+			Tile tile = at(sx, sy);
+			if (tile.occupied()) {
+				tile.setRotation(tile.rotation() + 1);
+				out.at(dx, dy) = tile;
+			}
 		}
 	
 	return out;
 }
 
 
-Shape::Shape(unsigned bits4x4, int pivotX, int pivotY, int rotations)
-	: pivotX_(pivotX), pivotY_(pivotY), rotations_(rotations)
-{
-	ShapeGrid mask { bits4x4 };
-	for (int r = 0; r < rotations_; r++) {
-		masks_.emplace_back(mask);
-		mask = rotateCW(mask, pivotX_, pivotY_);
-	}
-}
-
-
-const ShapeGrid & Shape::forRotation(int rot) const {
-	return masks_[rot % rotations_];
-}
-
-
 // -- global shape set
 
 
-static constexpr unsigned makeMask(unsigned a, unsigned b, unsigned c, unsigned d) {
-	return (a << 12) | (b << 8) | (c << 4) | d;
+static std::pair<ShapeType,std::vector<Shape>>
+genShapes(ShapeType type, const Shape & segs, int pivotX, int pivotY, int numRotations)
+{
+	Shape base { segs };
+	for (auto & row : base)
+		for (Tile & t : row)
+			if (t.occupied())
+				t.setSegment((uint8_t)t.type() - 1).setType(type);
+
+	std::vector<Shape> shapes { base };
+
+	for (int n = 0; n < numRotations - 1; n++)
+		shapes.push_back(shapes.back().rotateCW(pivotX, pivotY));
+	
+	return std::make_pair(type, shapes);
 }
 
 
-static std::vector<Shape> * createShapes() {
-	auto shapes = new std::vector<Shape>;
+const Shape & shapeWithRotation(ShapeType type, size_t rotation) {
+	static std::map<ShapeType, std::vector<Shape>> allShapes_s;
 
-	// T Bone
-	shapes->emplace_back(makeMask(0b0000,
-								  0b1110,
-								  0b0100,
-								  0b0000), 2, 2, 4);
-	
-	// Right Hook
-	shapes->emplace_back(makeMask(0b0000,
-								  0b1110,
-								  0b0010,
-								  0b0000), 2, 2, 4);
-	
-	// Left Stair
-	shapes->emplace_back(makeMask(0b0000,
-								  0b1100,
-								  0b0110,
-								  0b0000), 0, 0, 2);
-	
-	// Square
-	shapes->emplace_back(makeMask(0b0000,
-								  0b0110,
-								  0b0110,
-								  0b0000), 0, 0, 1);
-	
-	// Right Stair
-	shapes->emplace_back(makeMask(0b0000,
-								  0b0110,
-								  0b1100,
-								  0b0000), 0, 0, 2);
-	
-	// Left Hook
-	shapes->emplace_back(makeMask(0b0000,
-								  0b1110,
-								  0b1000,
-								  0b0000), 2, 2, 4);
-	
-	// Bar
-	shapes->emplace_back(makeMask(0b0000,
-								  0b0000,
-								  0b1111,
-								  0b0000), 1, 1, 2);
-	
-	return shapes;
-}
+	if (! allShapes_s.size()) {
+		Shape shp(1,1);
 
+		// To initialize shapes, we abuse the structure a bit by creating a map
+		// of the segment indexes + 1 where the ShapeType would usually be.
+		// The genShapes function will transform this into a valid shape
+		// with proper tile data.
 
-bool testShapeAt(const ShapeGrid & type, int x, int y) {
-	return type.test(15 - ((y * 4) + x));
-}
+		shp = { { 0,0,0,0 },
+				{ 1,2,3,0 },
+				{ 0,4,0,0 },
+				{ 0,0,0,0 } };
+		allShapes_s.insert(genShapes(ShapeType::TBone, shp, 1, 1, 4));
 
+		shp = { { 0,0,0,0 },
+				{ 1,2,3,0 },
+				{ 0,0,4,0 },
+				{ 0,0,0,0 } };
+		allShapes_s.insert(genShapes(ShapeType::RightHook, shp, 1, 1, 4));
 
-ShapeGrid shapeWithRotation(ShapeType type, int rotation) {
-	static std::unique_ptr<std::vector<Shape>> allShapes_s;
+		shp = { { 0,0,0,0 },
+				{ 1,2,0,0 },
+				{ 0,3,4,0 },
+				{ 0,0,0,0 } };
+		allShapes_s.insert(genShapes(ShapeType::LeftStair, shp, 0, 0, 2));
 
-	if (! allShapes_s)
-		allShapes_s.reset(createShapes());
+		shp = { { 0,0,0,0 },
+				{ 0,1,2,0 },
+				{ 0,3,4,0 },
+				{ 0,0,0,0 } };
+		allShapes_s.insert(genShapes(ShapeType::Square, shp, 0, 0, 1));
+
+		shp = { { 0,0,0,0 },
+				{ 0,3,4,0 },
+				{ 1,2,0,0 },
+				{ 0,0,0,0 } };
+		allShapes_s.insert(genShapes(ShapeType::RightStair, shp, 0, 0, 2));
+
+		shp = { { 0,0,0,0 },
+				{ 1,2,3,0 },
+				{ 4,0,0,0 },
+				{ 0,0,0,0 } };
+		allShapes_s.insert(genShapes(ShapeType::LeftHook, shp, 1, 1, 4));
+
+		shp = { { 0,0,0,0 },
+				{ 1,2,3,4 },
+				{ 0,0,0,0 },
+				{ 0,0,0,0 } };
+		allShapes_s.insert(genShapes(ShapeType::Bar, shp, 0, 0, 2));
+	}
 	
-	return allShapes_s->at(static_cast<int>(type)).forRotation(rotation);
+	auto & rsv = allShapes_s.at(type);
+	return rsv.at(rotation % rsv.size());
 }

@@ -28,8 +28,8 @@ void View::renderBG() {
 }
 
 
-sf::Color colorForShapeType(const ShapeType st) {
-	switch (st) {
+sf::Color colorForTile(const Tile t) {
+	switch (t.type()) {
 		case ShapeType::TBone:
 			return sf::Color::Red;
 		case ShapeType::RightHook:
@@ -52,21 +52,17 @@ sf::Color colorForShapeType(const ShapeType st) {
 }
 
 
-void View::renderTile(ShapeType type, float x, float y) {
-	window_->Draw(sf::Shape::Rectangle(x, y, x + 24., y + 24., colorForShapeType(type)));
+void View::renderTile(const Tile & tile, float x, float y) {
+	window_->Draw(sf::Shape::Rectangle(x, y, x + 24., y + 24., colorForTile(tile)));
 }
 
 
-void View::renderShape(ShapeType type, const ShapeGrid & shape, float x, float y) {
-	auto tile = sf::Shape::Rectangle(x, y, x + 24., y + 24., colorForShapeType(type));
-	
-	for (int b = 15; b > -1; b--) {
-		if (shape.test(b))
-			window_->Draw(tile);
-		
-		if ((b & 3) == 0)
-			tile.Move(-72., 24.);
-		else
-			tile.Move(24., 0.);
+void View::renderShape(const Shape & shape, float x, float y) {
+	for (int row = 0; row < shape.rows(); row++) {
+		for (int col = 0; col < shape.cols(); col++) {
+			Tile tile = shape.at(col, row);
+			if (tile.occupied())
+				renderTile(tile, x + (col * 24.f), y + (row * 24.f));
+		}
 	}
 }

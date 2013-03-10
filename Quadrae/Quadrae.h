@@ -15,26 +15,21 @@
 
 
 class Quadrae {
-	std::vector<std::bitset<16>> grid_;
-	
-	ShapeGrid extractShapeGridAt(int x, int y) const;
+	Shape grid_;
 
 public:
-	Quadrae(int gridHeight);
-	
-	using Row = std::bitset<10>;
-	
-	int height() const noexcept { return static_cast<int>(grid_.size()); }
+	Quadrae();
 	
 	void clear();
-	void setLine(int lineNr, const Row & line);
-	Row getLine(int lineNr) const;
+	void setLine(int lineNr, const Shape::Row & line);
+	Shape::Row getLine(int lineNr) const;
+	const Shape & shape() const { return grid_; }
 
 	std::vector<int> completedLines() const;
 	void collapseCompletedLines();
 	
-	bool canFitShapeAt(const ShapeGrid & shape, int x, int y) const;
-	void placeShapeAt(const ShapeGrid & shape, int x, int y);
+	bool canFitShapeAt(const Shape & shape, int col, int row) const;
+	void placeShapeAt(const Shape & shape, int col, int row);
 };
 
 

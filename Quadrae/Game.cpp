@@ -11,14 +11,9 @@
 Game::Game(const std::shared_ptr<sf::RenderWindow> & window)
 	: Scene(window)
 	, view_(new View(window))
-	, grid_(20)
-	, gridTiles_(20)
 {
 	tickLength_ = Time::Duration(500);
 	piece_ = ShapeType::None;
-
-	for (auto & gtLine : gridTiles_)
-		gtLine.resize(10, ShapeType::None);
 }
 
 
@@ -58,38 +53,11 @@ void Game::handleEvent(const sf::Event & event) {
 }
 
 
-void Game::placeShapeTiles(ShapeType type, const ShapeGrid & shape, int x, int y) {
-	for (int row = y; row < y + 4; row++)
-		if (row >= 0 && row < grid_.height())
-			for (int col = x; col < x + 4; col++) {
-				if (col >= 0 && col < 10 && testShapeAt(shape, col - x, row - y))
-					gridTiles_[row][col] = type;
-			}
-}
-
-
 void Game::handleCompletedLines() {
 	auto cl = grid_.completedLines();
 	if (! cl.size())
 		return;
 	grid_.collapseCompletedLines();
-
-	// the following is an algo copy of collapseCompletedLines, which sucks
-	
-	using TileLine = std::vector<ShapeType>;
-
-	auto completed = [](const TileLine & vst) {
-		return std::all_of(vst.begin(), vst.end(), [](ShapeType st){ return st != ShapeType::None; });
-	};
-
-	// shift the completed lines beyond the normal ones but preserve order of normal lines
-	std::stable_sort(gridTiles_.begin(), gridTiles_.end(), [=](const TileLine & a, const TileLine & b) {
-		return completed(a) && !completed(b);
-	});
-	
-	for (auto & tline : gridTiles_)
-		if (completed(tline))
-			std::fill(tline.begin(), tline.end(), ShapeType::None);
 }
 
 
@@ -98,30 +66,26 @@ void Game::activate() {
 	piece_ = ShapeType::None;
 
 	grid_.clear();
-	for (auto & gtLine : gridTiles_)
-		std::fill(gtLine.begin(), gtLine.end(), ShapeType::None);
 }
 
 
 void Game::suspend() {
-	
 }
 
 
 void Game::tick() {
 	if (piece_ == ShapeType::None) {
-		piece_ = static_cast<ShapeType>(Random::intInRange(0, 6));
+		piece_ = static_cast<ShapeType>(Random::intInRange(1, 7));
 		pieceRow_ = -1; pieceCol_ = 3;
 		pieceRot_ = 40000;
 	}
 	else {
-		auto shape = shapeWithRotation(piece_, pieceRot_);
+		auto & shape = shapeWithRotation(piece_, pieceRot_);
 
 		if (grid_.canFitShapeAt(shape, pieceCol_, pieceRow_ + 1))
 			pieceRow_++;
 		else {
 			grid_.placeShapeAt(shape, pieceCol_, pieceRow_);
-			placeShapeTiles(piece_, shape, pieceCol_, pieceRow_);
 			piece_ = ShapeType::None;
 			
 			handleCompletedLines();
@@ -137,17 +101,8 @@ void Game::frame() {
 	}
 	
 	view_->renderBG();
-	int row = 0, col = 0;
-	for (auto & gtLine : gridTiles_) {
-		col = 0;
-		for (auto tile : gtLine) {
-			if (tile != ShapeType::None)
-				view_->renderTile(tile, 24. * (col + 1), 24. * (row + 1));
-			col++;
-		}
-		row++;
-	}
+	view_->renderShape(grid_.shape(), 24.f, 24.f);
 	
 	if (piece_ != ShapeType::None)
-		view_->renderShape(piece_, shapeWithRotation(piece_, pieceRot_), 24. * (pieceCol_ + 1), 24. * (pieceRow_ + 1));
+		view_->renderShape(shapeWithRotation(piece_, pieceRot_), 24. * (pieceCol_ + 1), 24. * (pieceRow_ + 1));
 }

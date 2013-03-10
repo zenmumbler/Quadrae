@@ -27,7 +27,6 @@ enum class Direction {
 class Game : public Scene {
 	std::unique_ptr<View> view_;
 	Quadrae grid_;
-	std::vector<std::vector<ShapeType>> gridTiles_;
 
 	Time::Duration tickLength_;
 	Time::Point nextTick_;
@@ -36,7 +35,6 @@ class Game : public Scene {
 	Direction direction_;
 	int pieceRot_, pieceRow_, pieceCol_;
 	
-	void placeShapeTiles(ShapeType type, const ShapeGrid & shape, int x, int y);
 	void handleCompletedLines();
 
 public:
