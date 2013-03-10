@@ -10,7 +10,6 @@
 #define __Quadrae__Quadrae__
 
 #include <vector>
-#include <bitset>
 #include "Shape.h"
 
 

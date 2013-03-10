@@ -10,7 +10,6 @@
 #define __Quadrae__Shape__
 
 #include <vector>
-#include <bitset>
 
 enum class ShapeType {
 	None       = 0,
