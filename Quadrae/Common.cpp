@@ -32,16 +32,14 @@ namespace Random {
 
 
 namespace Time {
-	namespace detail {
-		static Point now_s = Clock::now();
-	}
+	static Point now_s = Clock::now();
 	
 	void step() {
-		detail::now_s = Clock::now();
+		now_s = Clock::now();
 	}
 
 	Point now() {
-		return detail::now_s;
+		return now_s;
 	}
 
 	int msDistance(Point from, Point to) {
@@ -52,6 +50,6 @@ namespace Time {
 	}
 	
 	int msSince(Point since) {
-		return msDistance(since, detail::now_s);
+		return msDistance(since, now_s);
 	}
 }

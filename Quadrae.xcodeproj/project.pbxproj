@@ -21,6 +21,8 @@
 		8E6D2C1A16E94B02008FCBFE /* TitleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1816E94B02008FCBFE /* TitleScene.cpp */; };
 		8E6D2C1D16E95D84008FCBFE /* TitleView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1B16E95D84008FCBFE /* TitleView.cpp */; };
 		8E6D2C2016ED2009008FCBFE /* Assets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1E16ED2009008FCBFE /* Assets.cpp */; };
+		8E6D2C2616ED32F0008FCBFE /* ShapeRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C2416ED32F0008FCBFE /* ShapeRender.cpp */; };
+		8E6D2C2916ED43A3008FCBFE /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C2716ED43A3008FCBFE /* Config.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +62,10 @@
 		8E6D2C1C16E95D84008FCBFE /* TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleView.h; sourceTree = "<group>"; };
 		8E6D2C1E16ED2009008FCBFE /* Assets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Assets.cpp; sourceTree = "<group>"; };
 		8E6D2C1F16ED2009008FCBFE /* Assets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Assets.h; sourceTree = "<group>"; };
+		8E6D2C2416ED32F0008FCBFE /* ShapeRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShapeRender.cpp; sourceTree = "<group>"; };
+		8E6D2C2516ED32F0008FCBFE /* ShapeRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeRender.h; sourceTree = "<group>"; };
+		8E6D2C2716ED43A3008FCBFE /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Config.cpp; sourceTree = "<group>"; };
+		8E6D2C2816ED43A3008FCBFE /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,10 @@
 				8E16B01F16DC30C8006BA148 /* Common.h */,
 				8E6D2C1E16ED2009008FCBFE /* Assets.cpp */,
 				8E6D2C1F16ED2009008FCBFE /* Assets.h */,
+				8E6D2C2716ED43A3008FCBFE /* Config.cpp */,
+				8E6D2C2816ED43A3008FCBFE /* Config.h */,
+				8E6D2C2416ED32F0008FCBFE /* ShapeRender.cpp */,
+				8E6D2C2516ED32F0008FCBFE /* ShapeRender.h */,
 				8E6D2C2216ED260A008FCBFE /* Models */,
 				8E6D2C2116ED25ED008FCBFE /* Views */,
 				8E6D2C2316ED2636008FCBFE /* Scene Controllers */,
@@ -123,10 +133,10 @@
 		8E6D2C2116ED25ED008FCBFE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8E16B02116DC38D2006BA148 /* GameView.cpp */,
-				8E16B02216DC38D2006BA148 /* GameView.h */,
 				8E6D2C1B16E95D84008FCBFE /* TitleView.cpp */,
 				8E6D2C1C16E95D84008FCBFE /* TitleView.h */,
+				8E16B02116DC38D2006BA148 /* GameView.cpp */,
+				8E16B02216DC38D2006BA148 /* GameView.h */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -216,6 +226,8 @@
 				8E6D2C1A16E94B02008FCBFE /* TitleScene.cpp in Sources */,
 				8E6D2C1D16E95D84008FCBFE /* TitleView.cpp in Sources */,
 				8E6D2C2016ED2009008FCBFE /* Assets.cpp in Sources */,
+				8E6D2C2616ED32F0008FCBFE /* ShapeRender.cpp in Sources */,
+				8E6D2C2916ED43A3008FCBFE /* Config.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

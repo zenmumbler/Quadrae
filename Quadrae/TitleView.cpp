@@ -41,11 +41,25 @@ void TitleView::renderLetters(const std::vector<std::vector<uint8_t>> & map, flo
 
 
 void TitleView::renderCopyright() const {
-	sf::String copy { "(c) 2013 by Arthur Langereis", Assets::font(), 12.f };
+	sf::String copy { "Game Code (c) 2013 by Arthur Langereis", Assets::font(), 12.f };
 	copy.SetColor(sf::Color::White);
 	copy.SetCenter(copy.GetRect().GetWidth() / 2.f, copy.GetRect().GetHeight());
-	copy.SetPosition(200.f, 515.f);
+	copy.SetPosition(200.f, 470.f);
+	window_->Draw(copy);
+
+	copy.SetText("Game concept, design and look and feel (c) 1985~2013 Tetris Holding");
+	copy.SetCenter(copy.GetRect().GetWidth() / 2.f, copy.GetRect().GetHeight());
+	copy.SetPosition(200.f, 485.f);
+	window_->Draw(copy);
+
+	copy.SetText("This game is a technical experiment and homage and is");
+	copy.SetCenter(copy.GetRect().GetWidth() / 2.f, copy.GetRect().GetHeight());
+	copy.SetPosition(200.f, 500.f);
+	window_->Draw(copy);
 	
+	copy.SetText("NOT affiliated with or endorsed by Tetris Holding or The Tetris Company");
+	copy.SetCenter(copy.GetRect().GetWidth() / 2.f, copy.GetRect().GetHeight());
+	copy.SetPosition(200.f, 515.f);
 	window_->Draw(copy);
 }
 
@@ -55,7 +69,6 @@ void TitleView::renderPressStart() const {
 	act.SetColor(sf::Color::White);
 	act.SetCenter(act.GetRect().GetWidth() / 2.f, act.GetRect().GetHeight());
 	act.SetPosition(200.f, 375.f);
-	
 	window_->Draw(act);
 }
 

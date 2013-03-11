@@ -15,6 +15,7 @@
 #include "Quadrae.h"
 #include "GameView.h"
 
+
 enum class Direction {
 	None,
 	Left,
@@ -43,6 +44,7 @@ class Game : public Scene {
 	void tryRotate(bool clockwise);
 	void tryMove(Direction dir);
 	void nextPiece();
+	void setLevel(int level);
 
 public:
 	Game(const std::shared_ptr<sf::RenderWindow> & window);

@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Common.h"
+#include "Config.h"
 #include "Assets.h"
 
 #include "TitleScene.h"
@@ -51,13 +52,14 @@ static bool init() {
 	if (! Assets::loadAll())
 		return false;
 	
+	// services
+	Random::seed();
+	Config::load();
+	
 	// set up scenes
 	Scenes::add("title", std::make_shared<Title>(window_s));
 	Scenes::add("game", std::make_shared<Game>(window_s));
 	Scenes::setCurrent("title");
-	
-	// misc
-	Random::seed();
 	
 	return true;
 }

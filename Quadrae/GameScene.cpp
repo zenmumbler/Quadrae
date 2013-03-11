@@ -6,14 +6,16 @@
 //  Copyright (c) 2013 Arthur Langereis. All rights reserved.
 //
 
+#include "Config.h"
 #include "GameScene.h"
+#include <cmath>
 
 Game::Game(const std::shared_ptr<sf::RenderWindow> & window)
 	: Scene(window)
 	, view_(new View(window))
 {
 	tickInterval_  = Time::Duration(500);
-	horizInterval_ = Time::Duration(200);
+	horizInterval_ = Time::Duration(150);
 	dropInterval_  = Time::Duration(50);
 	
 	level_ = 0;
@@ -33,7 +35,7 @@ void Game::activate() {
 	nextPiece_ = randomShapeType();
 	direction_ = Direction::None;
 
-	level_ = 0; // <-- get this from shared config
+	setLevel(Config::baseLevel());
 	lines_ = 0;
 
 	grid_.clear();
@@ -45,6 +47,8 @@ void Game::suspend() {
 
 
 void Game::handleEvent(const sf::Event & event) {
+	auto bindings = Config::keys();
+
 	if (event.Type == sf::Event::KeyPressed) {
 		// lame hack to overcome that a keypress in SFML
 		// can repeat, i.e. not physical but virtual keypress
@@ -52,21 +56,21 @@ void Game::handleEvent(const sf::Event & event) {
 			return;
 		lastKeyPressed_ = event.Key.Code;
 
-		if (event.Key.Code == sf::Key::Z)
+		if (event.Key.Code == bindings.rotCW)
 			tryRotate(true);
-		else if (event.Key.Code == sf::Key::A)
+		else if (event.Key.Code == bindings.rotCCW)
 			tryRotate(false);
-		else if (event.Key.Code == sf::Key::Left) {
+		else if (event.Key.Code == bindings.left) {
 			direction_ = Direction::Left;
 			nextHorizMove_ = Time::now() + horizInterval_;
 			tryMove(direction_);
 		}
-		else if (event.Key.Code == sf::Key::Right) {
+		else if (event.Key.Code == bindings.right) {
 			direction_ = Direction::Right;
 			nextHorizMove_ = Time::now() + horizInterval_;
 			tryMove(direction_);
 		}
-		else if (event.Key.Code == sf::Key::Down) {
+		else if (event.Key.Code == bindings.drop) {
 			direction_ = Direction::Drop;
 			tryMove(direction_);
 		}
@@ -78,12 +82,25 @@ void Game::handleEvent(const sf::Event & event) {
 	else if (event.Type == sf::Event::KeyReleased) {
 		// part two of avoiding system-originated
 		// repeated key presses
-		if (event.Key.Code == lastKeyPressed_)
+		auto key = event.Key.Code;
+
+		if (key == lastKeyPressed_)
 			lastKeyPressed_ = sf::Key::Pause; // some random key
-		
-		if (event.Key.Code == sf::Key::Left || event.Key.Code == sf::Key::Right || event.Key.Code == sf::Key::Down)
+
+		// set Direction back to None only if key released
+		// is the one that is affecting Direction now
+		if ((direction_ == Direction::Left && key == bindings.left) ||
+			(direction_ == Direction::Right && key == bindings.right) ||
+			(direction_ == Direction::Drop && key == bindings.drop))
 			direction_ = Direction::None;
 	}
+}
+
+
+void Game::setLevel(int level) {
+	level_ = std::max(0, std::min(15, level));
+	int ms = std::round(800. * std::pow(0.864, (double)level_));
+	tickInterval_ = Time::Duration(ms);
 }
 
 
@@ -97,9 +114,8 @@ void Game::tryRotate(bool clockwise) {
 	else
 		tryRot--;
 	
-	if (grid_.canFitShapeAt(shapeWithRotation(piece_, tryRot), pieceCol_, pieceRow_)) {
+	if (grid_.canFitShapeAt(shapeWithRotation(piece_, tryRot), pieceCol_, pieceRow_))
 		pieceRot_ = tryRot;
-	}
 }
 
 
@@ -199,7 +215,7 @@ void Game::frame() {
 	view_->renderShape(grid_.shape(), 24.f, 24.f);
 	
 	if (piece_ != ShapeType::None)
-		view_->renderShape(shapeWithRotation(piece_, pieceRot_), 24. * (pieceCol_ + 1), 24. * (pieceRow_ + 1));
+		view_->renderGridShape(shapeWithRotation(piece_, pieceRot_), pieceCol_, pieceRow_);
 	
 	if (nextPiece_ != ShapeType::None)
 		view_->renderShape(shapeWithRotation(nextPiece_, 0), 300.f, 50.f);
