@@ -21,7 +21,7 @@ public:
 	View(const std::shared_ptr<sf::RenderWindow> & window);
 
 	void renderBG() const;
-	void renderLineCounter(int lines) const;
+	void renderCounters(int level, int lines) const;
 
 	void renderShape(const Shape & shape, float x, float y) const;
 	void renderGridShape(const Shape & shape, int col, int row) const;

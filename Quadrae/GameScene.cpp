@@ -98,7 +98,7 @@ void Game::handleEvent(const sf::Event & event) {
 
 
 void Game::setLevel(int level) {
-	level_ = std::max(0, std::min(15, level));
+	level_ = std::max(0, std::min(30, level));
 	int ms = std::round(800. * std::pow(0.864, (double)level_));
 	tickInterval_ = Time::Duration(ms);
 }
@@ -153,6 +153,11 @@ void Game::handleCompletedLines() {
 
 	grid_.collapseCompletedLines();
 	lines_ += cl.size();
+	
+	// if we crossed a 10-line limit then the level increases
+	// old-school style
+	if ((lines_ % 10) < cl.size())
+		setLevel(level_ + 1);
 }
 
 
@@ -220,5 +225,5 @@ void Game::frame() {
 	if (nextPiece_ != ShapeType::None)
 		view_->renderShape(shapeWithRotation(nextPiece_, 0), 300.f, 50.f);
 
-	view_->renderLineCounter(lines_);
+	view_->renderCounters(level_, lines_);
 }

@@ -46,11 +46,15 @@ void View::renderGridShape(const Shape & shape, int col, int row) const {
 }
 
 
-void View::renderLineCounter(int lines) const {
-	sf::String copy { std::to_string(lines), Assets::font(), 36.f };
-	copy.SetColor(sf::Color::White);
-	copy.SetCenter(copy.GetRect().GetWidth() / 2.f, copy.GetRect().GetHeight());
-	copy.SetPosition(344.f, 400.f);
+void View::renderCounters(int level, int lines) const {
+	sf::String c { std::to_string(lines), Assets::font(), 36.f };
+	c.SetColor(sf::Color::White);
+	c.SetCenter(c.GetRect().GetWidth() / 2.f, c.GetRect().GetHeight());
+	c.SetPosition(344.f, 400.f);
+	window_->Draw(c);
 	
-	window_->Draw(copy);
+	c.SetText(std::to_string(level));
+	c.SetCenter(c.GetRect().GetWidth() / 2.f, c.GetRect().GetHeight());
+	c.SetPosition(344.f, 300.f);
+	window_->Draw(c);
 }
