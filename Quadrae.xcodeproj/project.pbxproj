@@ -15,7 +15,7 @@
 		8E16B01C16DBE87D006BA148 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B01A16DBE87D006BA148 /* GameScene.cpp */; };
 		8E16B02016DC30C8006BA148 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B01E16DC30C8006BA148 /* Common.cpp */; };
 		8E16B02316DC38D2006BA148 /* GameView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B02116DC38D2006BA148 /* GameView.cpp */; };
-		8E16B02616DC4210006BA148 /* Quadrae.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B02416DC4210006BA148 /* Quadrae.cpp */; };
+		8E16B02616DC4210006BA148 /* PlayField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B02416DC4210006BA148 /* PlayField.cpp */; };
 		8E6D2C1216E4F160008FCBFE /* Shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1016E4F160008FCBFE /* Shape.cpp */; };
 		8E6D2C1716E943E1008FCBFE /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1616E943E1008FCBFE /* Scene.cpp */; };
 		8E6D2C1A16E94B02008FCBFE /* TitleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1816E94B02008FCBFE /* TitleScene.cpp */; };
@@ -50,8 +50,8 @@
 		8E16B01F16DC30C8006BA148 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		8E16B02116DC38D2006BA148 /* GameView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameView.cpp; sourceTree = "<group>"; };
 		8E16B02216DC38D2006BA148 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
-		8E16B02416DC4210006BA148 /* Quadrae.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quadrae.cpp; sourceTree = "<group>"; };
-		8E16B02516DC4210006BA148 /* Quadrae.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quadrae.h; sourceTree = "<group>"; };
+		8E16B02416DC4210006BA148 /* PlayField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayField.cpp; sourceTree = "<group>"; };
+		8E16B02516DC4210006BA148 /* PlayField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayField.h; sourceTree = "<group>"; };
 		8E6D2C1016E4F160008FCBFE /* Shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shape.cpp; sourceTree = "<group>"; };
 		8E6D2C1116E4F160008FCBFE /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
 		8E6D2C1416E93FCE008FCBFE /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 			children = (
 				8E6D2C1016E4F160008FCBFE /* Shape.cpp */,
 				8E6D2C1116E4F160008FCBFE /* Shape.h */,
-				8E16B02416DC4210006BA148 /* Quadrae.cpp */,
-				8E16B02516DC4210006BA148 /* Quadrae.h */,
+				8E16B02416DC4210006BA148 /* PlayField.cpp */,
+				8E16B02516DC4210006BA148 /* PlayField.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -220,7 +220,7 @@
 				8E16B01C16DBE87D006BA148 /* GameScene.cpp in Sources */,
 				8E16B02016DC30C8006BA148 /* Common.cpp in Sources */,
 				8E16B02316DC38D2006BA148 /* GameView.cpp in Sources */,
-				8E16B02616DC4210006BA148 /* Quadrae.cpp in Sources */,
+				8E16B02616DC4210006BA148 /* PlayField.cpp in Sources */,
 				8E6D2C1216E4F160008FCBFE /* Shape.cpp in Sources */,
 				8E6D2C1716E943E1008FCBFE /* Scene.cpp in Sources */,
 				8E6D2C1A16E94B02008FCBFE /* TitleScene.cpp in Sources */,

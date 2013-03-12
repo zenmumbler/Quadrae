@@ -29,6 +29,6 @@ namespace Config {
 		keys_s.rotCW = sf::Key::Z;
 		keys_s.rotCCW = sf::Key::A;
 		
-		baseLevel_s = 19;
+		baseLevel_s = 8;
 	}
 }

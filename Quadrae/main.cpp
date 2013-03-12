@@ -58,7 +58,7 @@ static bool init() {
 	
 	// set up scenes
 	Scenes::add("title", std::make_shared<Title>(window_s));
-	Scenes::add("game", std::make_shared<Game>(window_s));
+	Scenes::add("game", std::make_shared<GameScene>(window_s));
 	Scenes::setCurrent("title");
 	
 	return true;

@@ -12,7 +12,7 @@
 #include <SFML/Graphics.hpp>
 #include "Scene.h"
 #include "Common.h"
-#include "Quadrae.h"
+#include "PlayField.h"
 #include "GameView.h"
 
 
@@ -24,11 +24,21 @@ enum class Direction {
 };
 
 
-class Game : public Scene {
-	std::unique_ptr<View> view_;
-	Quadrae grid_;
+class GameScene : public Scene {
+	enum class Phase {
+		InitialDelay,
+		PieceFall,
+		AfterLockDelay,
+		ClearLines,
+		Paused,
+		TopOut,
+		GameOver
+	};
+	
+	View view_;
+	PlayField field_;
 
-	Time::Duration tickInterval_, horizInterval_, dropInterval_;
+	Time::Duration tickInterval_, horizInterval_, dropInterval_, afterLockDelay_;
 	Time::Point nextTick_, nextHorizMove_, nextDropMove_;
 
 	ShapeType piece_, nextPiece_;
@@ -47,7 +57,7 @@ class Game : public Scene {
 	void setLevel(int level);
 
 public:
-	Game(const std::shared_ptr<sf::RenderWindow> & window);
+	GameScene(const std::shared_ptr<sf::RenderWindow> & window);
 	
 	virtual void handleEvent(const sf::Event & event) override;
 

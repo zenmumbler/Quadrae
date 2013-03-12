@@ -10,13 +10,14 @@
 #include "GameScene.h"
 #include <cmath>
 
-Game::Game(const std::shared_ptr<sf::RenderWindow> & window)
+GameScene::GameScene(const std::shared_ptr<sf::RenderWindow> & window)
 	: Scene(window)
-	, view_(new View(window))
+	, view_(window)
 {
-	tickInterval_  = Time::Duration(500);
-	horizInterval_ = Time::Duration(150);
-	dropInterval_  = Time::Duration(50);
+	tickInterval_   = Time::Duration(500);
+	horizInterval_  = Time::Duration(150);
+	dropInterval_   = Time::Duration(50);
+	afterLockDelay_ = Time::Duration(200);
 	
 	level_ = 0;
 	lines_ = 0;
@@ -26,7 +27,7 @@ Game::Game(const std::shared_ptr<sf::RenderWindow> & window)
 }
 
 
-void Game::activate() {
+void GameScene::activate() {
 	nextTick_ = Time::now();
 	nextHorizMove_ = nextTick_;
 	nextDropMove_ = nextTick_;
@@ -38,15 +39,15 @@ void Game::activate() {
 	setLevel(Config::baseLevel());
 	lines_ = 0;
 
-	grid_.clear();
+	field_.clear();
 }
 
 
-void Game::suspend() {
+void GameScene::suspend() {
 }
 
 
-void Game::handleEvent(const sf::Event & event) {
+void GameScene::handleEvent(const sf::Event & event) {
 	auto bindings = Config::keys();
 
 	if (event.Type == sf::Event::KeyPressed) {
@@ -97,14 +98,14 @@ void Game::handleEvent(const sf::Event & event) {
 }
 
 
-void Game::setLevel(int level) {
+void GameScene::setLevel(int level) {
 	level_ = std::max(0, std::min(30, level));
 	int ms = std::round(800. * std::pow(0.864, (double)level_));
 	tickInterval_ = Time::Duration(ms);
 }
 
 
-void Game::tryRotate(bool clockwise) {
+void GameScene::tryRotate(bool clockwise) {
 	if (piece_ == ShapeType::None)
 		return;
 	
@@ -114,12 +115,12 @@ void Game::tryRotate(bool clockwise) {
 	else
 		tryRot--;
 	
-	if (grid_.canFitShapeAt(shapeWithRotation(piece_, tryRot), pieceCol_, pieceRow_))
+	if (field_.canFitShapeAt(shapeWithRotation(piece_, tryRot), pieceCol_, pieceRow_))
 		pieceRot_ = tryRot;
 }
 
 
-void Game::tryMove(Direction dir) {
+void GameScene::tryMove(Direction dir) {
 	if (piece_ == ShapeType::None)
 		return;
 		
@@ -136,7 +137,7 @@ void Game::tryMove(Direction dir) {
 		movedDown = true;
 	}
 	
-	if (grid_.canFitShapeAt(shapeWithRotation(piece_, pieceRot_), tryCol, tryRow)) {
+	if (field_.canFitShapeAt(shapeWithRotation(piece_, pieceRot_), tryCol, tryRow)) {
 		pieceRow_ = tryRow;
 		pieceCol_ = tryCol;
 		
@@ -146,12 +147,12 @@ void Game::tryMove(Direction dir) {
 }
 
 
-void Game::handleCompletedLines() {
-	auto cl = grid_.completedLines();
+void GameScene::handleCompletedLines() {
+	auto cl = field_.completedLines();
 	if (! cl.size())
 		return;
 
-	grid_.collapseCompletedLines();
+	field_.collapseCompletedLines();
 	lines_ += cl.size();
 	
 	// if we crossed a 10-line limit then the level increases
@@ -161,7 +162,7 @@ void Game::handleCompletedLines() {
 }
 
 
-void Game::nextPiece() {
+void GameScene::nextPiece() {
 	piece_ = nextPiece_;
 	nextPiece_ = randomShapeType();
 	
@@ -170,7 +171,7 @@ void Game::nextPiece() {
 }
 
 
-void Game::tick() {
+void GameScene::tick() {
 	if (piece_ == ShapeType::None) {
 		// piece is None at start to allow for 1 tick pause
 		// before gameplay
@@ -179,11 +180,12 @@ void Game::tick() {
 	else {
 		auto & shape = shapeWithRotation(piece_, pieceRot_);
 
-		if (grid_.canFitShapeAt(shape, pieceCol_, pieceRow_ + 1))
+		if (field_.canFitShapeAt(shape, pieceCol_, pieceRow_ + 1))
 			pieceRow_++;
 		else {
-			grid_.placeShapeAt(shape, pieceCol_, pieceRow_);
+			field_.placeShapeAt(shape, pieceCol_, pieceRow_);
 			nextPiece();
+			nextTick_ += afterLockDelay_;
 			
 			handleCompletedLines();
 		}
@@ -191,7 +193,7 @@ void Game::tick() {
 }
 
 
-void Game::frame() {
+void GameScene::frame() {
 	// First allow player input to move piece
 	// then process any forced down movement in the tick.
 	// This is to allow for last moment movements.
@@ -216,14 +218,14 @@ void Game::frame() {
 	}
 
 	// render scene
-	view_->renderBG();
-	view_->renderShape(grid_.shape(), 24.f, 24.f);
+	view_.renderBG();
+	view_.renderShape(field_.shape(), 24.f, 24.f);
 	
 	if (piece_ != ShapeType::None)
-		view_->renderGridShape(shapeWithRotation(piece_, pieceRot_), pieceCol_, pieceRow_);
+		view_.renderGridShape(shapeWithRotation(piece_, pieceRot_), pieceCol_, pieceRow_);
 	
 	if (nextPiece_ != ShapeType::None)
-		view_->renderShape(shapeWithRotation(nextPiece_, 0), 300.f, 50.f);
+		view_.renderShape(shapeWithRotation(nextPiece_, 0), 300.f, 50.f);
 
-	view_->renderCounters(level_, lines_);
+	view_.renderCounters(level_, lines_);
 }

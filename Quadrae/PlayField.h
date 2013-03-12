@@ -1,23 +1,23 @@
 //
-//  Quadrae.h
+//  PlayField.h
 //  Quadrae
 //
 //  Created by Arthur Langereis on 2/25/13.
 //  Copyright (c) 2013 Arthur Langereis. All rights reserved.
 //
 
-#ifndef __Quadrae__Quadrae__
-#define __Quadrae__Quadrae__
+#ifndef __Quadrae__PlayField__
+#define __Quadrae__PlayField__
 
 #include <vector>
 #include "Shape.h"
 
 
-class Quadrae {
+class PlayField {
 	Shape grid_;
 
 public:
-	Quadrae();
+	PlayField();
 	
 	void clear();
 	void setLine(int lineNr, const Shape::Row & line);
@@ -32,4 +32,4 @@ public:
 };
 
 
-#endif /* defined(__Quadrae__Quadrae__) */
+#endif /* defined(__Quadrae__PlayField__) */

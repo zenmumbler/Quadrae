@@ -1,5 +1,5 @@
 //
-//  Quadrae.cpp
+//  PlayField.cpp
 //  Quadrae
 //
 //  Created by Arthur Langereis on 2/25/13.
@@ -7,7 +7,7 @@
 //
 
 #include <algorithm>
-#include "Quadrae.h"
+#include "PlayField.h"
 
 
 // util funcs
@@ -21,29 +21,29 @@ static void clearLine(Shape::Row & line) {
 }
 
 
-// Quadrae class
-Quadrae::Quadrae()
+// PlayField class
+PlayField::PlayField()
 	: grid_(10, 20)
 {}
 
 
-void Quadrae::clear() {
+void PlayField::clear() {
 	for (auto & line : grid_)
 		clearLine(line);
 }
 
 
-void Quadrae::setLine(int lineNr, const Shape::Row & line) {
+void PlayField::setLine(int lineNr, const Shape::Row & line) {
 	grid_.row(lineNr) = line;
 }
 
 
-Shape::Row Quadrae::getLine(int lineNr) const {
+Shape::Row PlayField::getLine(int lineNr) const {
 	return grid_.row(lineNr);
 }
 
 
-std::vector<int> Quadrae::completedLines() const {
+std::vector<int> PlayField::completedLines() const {
 	decltype(completedLines()) lines;
 	int lineNr = 0;
 
@@ -57,7 +57,7 @@ std::vector<int> Quadrae::completedLines() const {
 }
 
 
-void Quadrae::collapseCompletedLines() {
+void PlayField::collapseCompletedLines() {
 	// shift the completed lines beyond the normal ones but preserve order of normal lines
 	std::stable_sort(grid_.begin(), grid_.end(), [](const Shape::Row & a, const Shape::Row & b) {
 		return completed(a) && !completed(b);
@@ -70,7 +70,7 @@ void Quadrae::collapseCompletedLines() {
 }
 
 
-bool Quadrae::canFitShapeAt(const Shape & shape, int col, int row) const {
+bool PlayField::canFitShapeAt(const Shape & shape, int col, int row) const {
 	for (int y = row; y < row + (int)shape.rows(); y++)
 		for (int x = col; x < col + (int)shape.cols(); x++) {
 			if (shape.at(x - col, y - row).occupied()) {
@@ -84,7 +84,7 @@ bool Quadrae::canFitShapeAt(const Shape & shape, int col, int row) const {
 }
 
 
-void Quadrae::placeShapeAt(const Shape & shape, int col, int row) {
+void PlayField::placeShapeAt(const Shape & shape, int col, int row) {
 	for (int y = row; y < row + (int)shape.rows(); y++)
 		if (y >= 0 && y < (int)grid_.rows())
 			for (int x = col; x < col + (int)shape.cols(); x++) {
