@@ -14,7 +14,7 @@ GameScene::GameScene(const std::shared_ptr<sf::RenderWindow> & window)
 	: Scene(window)
 	, view_(window)
 {
-	tickInterval_   = Time::Duration(500);
+	tickInterval_   = Time::Duration(500); // variable, will be set in setLevel(int)
 	horizInterval_  = Time::Duration(120);
 	dropInterval_   = Time::Duration(50);
 	
@@ -87,6 +87,10 @@ void GameScene::handleEvent(const sf::Event & event) {
 			tryMove(direction_);
 		}
 
+		// Return -> toggle pause
+		else if (event.Key.Code == sf::Key::Return)
+			togglePause();
+
 		// ESC -> back to titles
 		else if (event.Key.Code == sf::Key::Escape)
 			Scenes::setCurrent("title");
@@ -113,6 +117,26 @@ void GameScene::setLevel(int level) {
 	level_ = std::max(0, std::min(30, level));
 	int ms = std::round(800. * std::pow(0.864, (double)level_));
 	tickInterval_ = Time::Duration(ms);
+}
+
+
+void GameScene::togglePause() {
+	if (phase_ == Phase::GameOver || phase_ == Phase::TopOut)
+		return;
+	if (phase_ == Phase::Paused) {
+		// pretend pause time did not happen
+		auto pauseDuration = Time::now() - pausedAt_;
+		nextTick_ += pauseDuration;
+		nextHorizMove_ += pauseDuration;
+		nextDropMove_ += pauseDuration;
+
+		phase_ = savePhase_;
+	}
+	else {
+		pausedAt_ = Time::now();
+		savePhase_ = phase_;
+		phase_ = Phase::Paused;
+	}
 }
 
 
@@ -223,24 +247,27 @@ void GameScene::frame() {
 	// the player keeps the key down for an amount of time.
 	// The initial move is always performed immediately in
 	// the event handler.
-	if (Time::now() >= nextHorizMove_) {
-		if (direction_ == Direction::Left || direction_ == Direction::Right)
-			tryMove(direction_);
-		nextHorizMove_ += horizInterval_;
-	}
-	if (Time::now() >= nextDropMove_) {
-		if (direction_ == Direction::Drop)
-			tryMove(direction_);
-		nextDropMove_ += dropInterval_;
-	}
-
-	if (Time::now() >= nextTick_) {
-		if (phase_ == Phase::ClearLines) {
-			handleCompletedLines();
-			nextPiece();
-			phase_ = Phase::PieceFall;
+	
+	if (phase_ != Phase::Paused) {
+		if (Time::now() >= nextHorizMove_) {
+			if (direction_ == Direction::Left || direction_ == Direction::Right)
+				tryMove(direction_);
+			nextHorizMove_ += horizInterval_;
 		}
-		tick();
+		if (Time::now() >= nextDropMove_) {
+			if (direction_ == Direction::Drop)
+				tryMove(direction_);
+			nextDropMove_ += dropInterval_;
+		}
+
+		if (Time::now() >= nextTick_) {
+			if (phase_ == Phase::ClearLines) {
+				handleCompletedLines();
+				nextPiece();
+				phase_ = Phase::PieceFall;
+			}
+			tick();
+		}
 	}
 
 	// render scene
@@ -253,6 +280,8 @@ void GameScene::frame() {
 		float p = timeRatio(Time::now(), nextTick_, clearLineAnimDuration_);
 		view_.fadeClearedLines(field_, p);
 	}
+	if (phase_ == Phase::Paused)
+		view_.renderPause();
 
 	if (phase_ == Phase::PieceFall)
 		if (piece_ != ShapeType::None)

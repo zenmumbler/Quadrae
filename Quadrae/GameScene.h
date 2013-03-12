@@ -35,12 +35,12 @@ class GameScene : public Scene {
 	
 	GameView view_;
 	PlayField field_;
-	Phase phase_;
+	Phase phase_, savePhase_;
 
 	Time::Duration tickInterval_, horizInterval_, dropInterval_;
 	Time::Duration initialDelay_, afterLockDelay_;
 	Time::Duration clearLineAnimDuration_, finalAnimDuration_;
-	Time::Point nextTick_, nextHorizMove_, nextDropMove_;
+	Time::Point nextTick_, nextHorizMove_, nextDropMove_, pausedAt_;
 
 	ShapeType piece_, nextPiece_;
 	Direction direction_;
@@ -56,6 +56,7 @@ class GameScene : public Scene {
 	void tryMove(Direction dir);
 	void nextPiece();
 	void setLevel(int level);
+	void togglePause();
 
 public:
 	GameScene(const std::shared_ptr<sf::RenderWindow> & window);
