@@ -7,11 +7,13 @@
 //
 
 #include <map>
+#include <cmath>
+#include <iostream>
 #include "Assets.h"
 #include "ShapeRender.h"
 #include "GameView.h"
 
-View::View(const std::shared_ptr<sf::RenderWindow> & window)
+GameView::GameView(const std::shared_ptr<sf::RenderWindow> & window)
 	: window_(window)
 {}
 
@@ -23,7 +25,7 @@ View::View(const std::shared_ptr<sf::RenderWindow> & window)
  
  */
 
-void View::renderBG() const {
+void GameView::renderBG() const {
 	window_->Clear();
 	
 	auto border = sf::Shape::Rectangle(23, 23, 23 + 242, 23 + 482, { 32,32,32 }, 1.f, sf::Color::White);
@@ -31,12 +33,12 @@ void View::renderBG() const {
 }
 
 
-void View::renderShape(const Shape & shape, float x, float y) const {
+void GameView::renderShape(const Shape & shape, float x, float y) const {
 	ShapeRender::render(*window_, shape, x, y);
 }
 
 
-void View::renderGridShape(const Shape & shape, int col, int row) const {
+void GameView::renderGridShape(const Shape & shape, int col, int row) const {
 	auto x = (col + 1) * 24.f;
 	auto y = (row + 1) * 24.f;
 	ShapeRender::render(shape, x, y, [=](const sf::Sprite & sp) {
@@ -46,7 +48,26 @@ void View::renderGridShape(const Shape & shape, int col, int row) const {
 }
 
 
-void View::renderCounters(int level, int lines) const {
+void GameView::fadeClearedLines(const PlayField & field, float progress) const {
+	auto lineNrs = field.completedLines();
+
+	for (int l : lineNrs) {
+		auto lineShape = Shape(std::vector<Shape::Row> { field.getLine(l) });
+		auto x = (0 + 1) * 24.f;
+		auto y = (l + 1) * 24.f;
+		int step = std::max(0, 5 - (int)std::floor(progress * 6.f));
+
+		ShapeRender::render(lineShape, x, y, [=](sf::Sprite && sp) {
+			// blink, blink, hold, disappear
+			if (step == 5 || (step & 1) == 0)
+				sp.SetColor({ 42, 85, 107, 255 });
+			window_->Draw(sp);
+		});
+	}
+}
+
+
+void GameView::renderCounters(int level, int lines) const {
 	sf::String c { std::to_string(lines), Assets::font(), 36.f };
 	c.SetColor(sf::Color::White);
 	c.SetCenter(c.GetRect().GetWidth() / 2.f, c.GetRect().GetHeight());

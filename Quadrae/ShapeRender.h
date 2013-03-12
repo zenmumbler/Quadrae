@@ -16,7 +16,7 @@
 namespace ShapeRender {
 	sf::IntRect texRectForTile(const Tile t);
 	sf::Sprite genTileSprite(const Tile & tile, float x, float y);
-	void render(const Shape & shape, float x, float y, const std::function<void(sf::Sprite)> act);
+	void render(const Shape & shape, float x, float y, const std::function<void(sf::Sprite&&)> act);
 	void render(sf::RenderTarget & rt, const Shape & shape, float x, float y);
 }
 

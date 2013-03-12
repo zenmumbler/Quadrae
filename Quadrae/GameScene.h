@@ -26,19 +26,20 @@ enum class Direction {
 
 class GameScene : public Scene {
 	enum class Phase {
-		InitialDelay,
 		PieceFall,
-		AfterLockDelay,
 		ClearLines,
 		Paused,
 		TopOut,
 		GameOver
 	};
 	
-	View view_;
+	GameView view_;
 	PlayField field_;
+	Phase phase_;
 
-	Time::Duration tickInterval_, horizInterval_, dropInterval_, afterLockDelay_;
+	Time::Duration tickInterval_, horizInterval_, dropInterval_;
+	Time::Duration initialDelay_, afterLockDelay_;
+	Time::Duration clearLineAnimDuration_, finalAnimDuration_;
 	Time::Point nextTick_, nextHorizMove_, nextDropMove_;
 
 	ShapeType piece_, nextPiece_;

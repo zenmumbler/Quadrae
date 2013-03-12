@@ -15,15 +15,22 @@ GameScene::GameScene(const std::shared_ptr<sf::RenderWindow> & window)
 	, view_(window)
 {
 	tickInterval_   = Time::Duration(500);
-	horizInterval_  = Time::Duration(150);
+	horizInterval_  = Time::Duration(120);
 	dropInterval_   = Time::Duration(50);
+	
+	initialDelay_   = Time::Duration(1000);
 	afterLockDelay_ = Time::Duration(200);
+	
+	clearLineAnimDuration_ = Time::Duration(1000);
+	finalAnimDuration_ = Time::Duration(2000);
 	
 	level_ = 0;
 	lines_ = 0;
 
 	piece_ = ShapeType::None;
 	nextPiece_ = ShapeType::None;
+	
+	phase_ = Phase::GameOver;
 }
 
 
@@ -31,13 +38,17 @@ void GameScene::activate() {
 	nextTick_ = Time::now();
 	nextHorizMove_ = nextTick_;
 	nextDropMove_ = nextTick_;
+	
+	setLevel(Config::baseLevel());
+	lines_ = 0;
+	phase_ = Phase::PieceFall;
 
 	piece_ = ShapeType::None;
 	nextPiece_ = randomShapeType();
 	direction_ = Direction::None;
-
-	setLevel(Config::baseLevel());
-	lines_ = 0;
+	
+	nextPiece();
+	nextTick_ += initialDelay_;
 
 	field_.clear();
 }
@@ -173,23 +184,34 @@ void GameScene::nextPiece() {
 
 void GameScene::tick() {
 	if (piece_ == ShapeType::None) {
-		// piece is None at start to allow for 1 tick pause
-		// before gameplay
 		nextPiece();
 	}
 	else {
 		auto & shape = shapeWithRotation(piece_, pieceRot_);
 
-		if (field_.canFitShapeAt(shape, pieceCol_, pieceRow_ + 1))
+		if (field_.canFitShapeAt(shape, pieceCol_, pieceRow_ + 1)) {
 			pieceRow_++;
+			nextTick_ += tickInterval_;
+		}
 		else {
 			field_.placeShapeAt(shape, pieceCol_, pieceRow_);
-			nextPiece();
-			nextTick_ += afterLockDelay_;
 			
-			handleCompletedLines();
+			if (field_.completedLines().size()) {
+				phase_ = Phase::ClearLines;
+				nextTick_ = Time::now() + Time::Duration(1000);
+			}
+			else {
+				nextPiece();
+				nextTick_ += tickInterval_ + afterLockDelay_;
+			}
 		}
 	}
+}
+
+
+static float timeRatio(const Time::Point & from, const Time::Point & to, const Time::Duration & total) {
+	using namespace std::chrono;
+	return (float)(duration_cast<Time::Duration>(to - from).count()) / (float)total.count();
 }
 
 
@@ -213,19 +235,30 @@ void GameScene::frame() {
 	}
 
 	if (Time::now() >= nextTick_) {
+		if (phase_ == Phase::ClearLines) {
+			handleCompletedLines();
+			nextPiece();
+			phase_ = Phase::PieceFall;
+		}
 		tick();
-		nextTick_ += tickInterval_;
 	}
 
 	// render scene
 	view_.renderBG();
-	view_.renderShape(field_.shape(), 24.f, 24.f);
-	
-	if (piece_ != ShapeType::None)
-		view_.renderGridShape(shapeWithRotation(piece_, pieceRot_), pieceCol_, pieceRow_);
-	
-	if (nextPiece_ != ShapeType::None)
-		view_.renderShape(shapeWithRotation(nextPiece_, 0), 300.f, 50.f);
-
 	view_.renderCounters(level_, lines_);
+
+	if (phase_ != Phase::Paused && phase_ != Phase::GameOver)
+		view_.renderShape(field_.shape(), 24.f, 24.f);
+	if (phase_ == Phase::ClearLines) {
+		float p = timeRatio(Time::now(), nextTick_, clearLineAnimDuration_);
+		view_.fadeClearedLines(field_, p);
+	}
+
+	if (phase_ == Phase::PieceFall)
+		if (piece_ != ShapeType::None)
+			view_.renderGridShape(shapeWithRotation(piece_, pieceRot_), pieceCol_, pieceRow_);
+
+	if (phase_ == Phase::PieceFall || phase_ == Phase::ClearLines)
+		if (nextPiece_ != ShapeType::None)
+			view_.renderShape(shapeWithRotation(nextPiece_, 0), 300.f, 50.f);
 }

@@ -41,7 +41,7 @@ namespace ShapeRender {
 	}
 
 	
-	void render(const Shape & shape, float x, float y, const std::function<void(sf::Sprite)> act) {
+	void render(const Shape & shape, float x, float y, const std::function<void(sf::Sprite&&)> act) {
 		for (auto row = 0u; row < shape.rows(); row++) {
 			for (auto col = 0u; col < shape.cols(); col++) {
 				Tile tile = shape.at(col, row);
