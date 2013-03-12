@@ -87,9 +87,13 @@ void GameScene::handleEvent(const sf::Event & event) {
 			tryMove(direction_);
 		}
 
-		// Return -> toggle pause
-		else if (event.Key.Code == sf::Key::Return)
-			togglePause();
+		// Return -> toggle pause or back to titles if Game Over
+		else if (event.Key.Code == sf::Key::Return) {
+			if (phase_ == Phase::GameOver)
+				Scenes::setCurrent("title");
+			else
+				togglePause();
+		}
 
 		// ESC -> back to titles
 		else if (event.Key.Code == sf::Key::Escape)
@@ -218,15 +222,25 @@ void GameScene::tick() {
 			nextTick_ += tickInterval_;
 		}
 		else {
-			field_.placeShapeAt(shape, pieceCol_, pieceRow_);
-			
-			if (field_.completedLines().size()) {
-				phase_ = Phase::ClearLines;
-				nextTick_ = Time::now() + Time::Duration(1000);
+			if (! field_.canFitShapeAt(shape, pieceCol_, pieceRow_)) {
+				// the shape will overwrite something in the top
+				// that means game over
+				field_.placeShapeAt(shape, pieceCol_, pieceRow_);
+				piece_ = ShapeType::None;
+				phase_ = Phase::TopOut;
+				nextTick_ += finalAnimDuration_;
 			}
 			else {
-				nextPiece();
-				nextTick_ += tickInterval_ + afterLockDelay_;
+				field_.placeShapeAt(shape, pieceCol_, pieceRow_);
+				
+				if (field_.completedLines().size()) {
+					phase_ = Phase::ClearLines;
+					nextTick_ = Time::now() + clearLineAnimDuration_;
+				}
+				else {
+					nextPiece();
+					nextTick_ += tickInterval_ + afterLockDelay_;
+				}
 			}
 		}
 	}
@@ -266,7 +280,11 @@ void GameScene::frame() {
 				nextPiece();
 				phase_ = Phase::PieceFall;
 			}
-			tick();
+			else if (phase_ == Phase::TopOut)
+				phase_ = Phase::GameOver;
+			
+			if (phase_ == Phase::PieceFall || phase_ == Phase::ClearLines)
+				tick();
 		}
 	}
 
@@ -274,19 +292,28 @@ void GameScene::frame() {
 	view_.renderBG();
 	view_.renderCounters(level_, lines_);
 
+	// playfield
 	if (phase_ != Phase::Paused && phase_ != Phase::GameOver)
 		view_.renderShape(field_.shape(), 24.f, 24.f);
-	if (phase_ == Phase::ClearLines) {
+
+	// stuff inside the playfield
+	if (phase_ == Phase::PieceFall) {
+		if (piece_ != ShapeType::None)
+			view_.renderGridShape(shapeWithRotation(piece_, pieceRot_), pieceCol_, pieceRow_);
+	}
+	else if (phase_ == Phase::ClearLines) {
 		float p = timeRatio(Time::now(), nextTick_, clearLineAnimDuration_);
 		view_.fadeClearedLines(field_, p);
 	}
-	if (phase_ == Phase::Paused)
+	else if (phase_ == Phase::Paused)
 		view_.renderPause();
+	else if (phase_ == Phase::TopOut)
+		view_.fadePlayField(timeRatio(Time::now(), nextTick_, finalAnimDuration_));
+	else if (phase_ == Phase::GameOver)
+		view_.renderGameOver();
 
-	if (phase_ == Phase::PieceFall)
-		if (piece_ != ShapeType::None)
-			view_.renderGridShape(shapeWithRotation(piece_, pieceRot_), pieceCol_, pieceRow_);
 
+	// next piece
 	if (phase_ == Phase::PieceFall || phase_ == Phase::ClearLines)
 		if (nextPiece_ != ShapeType::None)
 			view_.renderShape(shapeWithRotation(nextPiece_, 0), 300.f, 50.f);

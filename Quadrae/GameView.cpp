@@ -67,6 +67,12 @@ void GameView::fadeClearedLines(const PlayField & field, float progress) const {
 }
 
 
+void GameView::fadePlayField(float progress) const {
+	auto border = sf::Shape::Rectangle(24, 24, 24 + 240, 24 + 480, { 142,131,0, 255 * (1.0f-progress) });
+	window_->Draw(border);
+}
+
+
 void GameView::renderCounters(int level, int lines) const {
 	sf::String c { std::to_string(lines), Assets::font(), 36.f };
 	c.SetColor(sf::Color::White);
@@ -86,5 +92,19 @@ void GameView::renderPause() const {
 	c.SetColor({ 128, 128, 128 });
 	c.SetCenter(c.GetRect().GetWidth() / 2.f, c.GetRect().GetHeight());
 	c.SetPosition(6 * 24.f, 250.f);
+	window_->Draw(c);
+}
+
+
+void GameView::renderGameOver() const {
+	sf::String c { "Game", Assets::font(), 36.f };
+	c.SetColor({ 141, 71, 108 });
+	c.SetCenter(c.GetRect().GetWidth() / 2.f, c.GetRect().GetHeight());
+	c.SetPosition(6 * 24.f, 250.f);
+	window_->Draw(c);
+
+	c.SetText("Over");
+	c.SetCenter(c.GetRect().GetWidth() / 2.f, c.GetRect().GetHeight());
+	c.SetPosition(6 * 24.f, 300.f);
 	window_->Draw(c);
 }

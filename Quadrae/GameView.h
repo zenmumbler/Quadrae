@@ -24,10 +24,13 @@ public:
 	void renderBG() const;
 	void renderCounters(int level, int lines) const;
 	void renderPause() const;
+	void renderGameOver() const;
 
 	void renderShape(const Shape & shape, float x, float y) const;
 	void renderGridShape(const Shape & shape, int col, int row) const;
+
 	void fadeClearedLines(const PlayField & field, float progress) const;
+	void fadePlayField(float progress) const;
 };
 
 #endif /* defined(__Quadrae__View__) */
