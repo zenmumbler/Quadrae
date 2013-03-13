@@ -6,9 +6,8 @@
 //  Copyright (c) 2013 Arthur Langereis. All rights reserved.
 //
 
-#include <map>
 #include <cmath>
-#include <iostream>
+#include "Config.h"
 #include "Assets.h"
 #include "ShapeRender.h"
 #include "GameView.h"
@@ -26,9 +25,9 @@ GameView::GameView(const std::shared_ptr<sf::RenderWindow> & window)
  */
 
 void GameView::renderBG() const {
-	window_->Clear();
-	
-	auto border = sf::Shape::Rectangle(23, 23, 23 + 242, 23 + 482, { 32,32,32 }, 1.f, sf::Color::White);
+	ShapeRender::renderTiledBG(*window_, Config::bgOffX(), Config::bgOffY(), Config::bgScale());
+
+	auto border = sf::Shape::Rectangle(23, 23, 23 + 242, 23 + 482, { 32,32,32, 240 }, 1.f, sf::Color::White);
 	window_->Draw(border);
 }
 

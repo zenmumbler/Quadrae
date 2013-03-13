@@ -56,7 +56,7 @@ void Title::suspend() {
 
 
 void Title::frame() {
-	window_->Clear({ 64, 92, 64 });
+	view_.renderBG();
 
 	if (Time::now() > nextAction_)
 		nextPhase();

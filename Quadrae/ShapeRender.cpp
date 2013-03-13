@@ -7,6 +7,7 @@
 //
 
 #include <map>
+#include <cmath>
 #include "Assets.h"
 #include "ShapeRender.h"
 
@@ -58,4 +59,32 @@ namespace ShapeRender {
 		});
 	}
 
+	
+	// not really shape-related, but I can't be arsed to create a new file for this
+	void renderTiledBG(sf::RenderTarget & rt, float x, float y, float scale) {
+		auto & bg = Assets::bgTexture();
+		float scaledWidth = bg.GetWidth() * scale;
+		float scaledHeight = bg.GetHeight() * scale;
+
+		x = fmodf(x, scaledWidth);
+		if (x > 0.f) x -= scaledWidth;
+		y = fmodf(y, scaledHeight);
+		if (y > 0.f) y -= scaledHeight;
+
+		int tilesX = ceilf((rt.GetWidth() - x) / scaledWidth);
+		int tilesY = ceilf((rt.GetHeight() - y) / scaledHeight);
+		
+		sf::Sprite sp { bg, { x, y }, { scale, scale } };
+		
+		
+		while (tilesY--) {
+			int ttx = tilesX;
+			while (ttx--) {
+				rt.Draw(sp);
+				sp.Move(scaledWidth, 0.f);
+			}
+			sp.Move(0.f, scaledHeight);
+			sp.SetX(x);
+		}
+	}
 }

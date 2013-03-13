@@ -20,6 +20,11 @@ namespace Config {
 	
 	int baseLevel();
 	void setBaseLevel(int level);
+
+	void stepBGAnim();
+	float bgOffX();
+	float bgOffY();
+	float bgScale();
 	
 	void load();
 };

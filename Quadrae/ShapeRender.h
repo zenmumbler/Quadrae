@@ -18,6 +18,8 @@ namespace ShapeRender {
 	sf::Sprite genTileSprite(const Tile & tile, float x, float y);
 	void render(const Shape & shape, float x, float y, const std::function<void(sf::Sprite&&)> act);
 	void render(sf::RenderTarget & rt, const Shape & shape, float x, float y);
+	
+	void renderTiledBG(sf::RenderTarget & rt, float x, float y, float scale);
 }
 
 #endif /* defined(__Quadrae__ShapeRender__) */

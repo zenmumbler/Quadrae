@@ -20,6 +20,7 @@ class TitleView {
 public:
 	TitleView(const std::shared_ptr<sf::RenderWindow> & window);
 
+	void renderBG() const;
 	void renderLetters(const std::vector<std::vector<uint8_t>> & map, float percentage) const;
 	void renderCopyright() const;
 	void renderPressStart() const;

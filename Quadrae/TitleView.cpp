@@ -7,12 +7,19 @@
 //
 
 #include <cmath>
+#include "Config.h"
 #include "Assets.h"
+#include "ShapeRender.h"
 #include "TitleView.h"
 
 TitleView::TitleView(const std::shared_ptr<sf::RenderWindow> & window)
 	: window_(window)
 {}
+
+
+void TitleView::renderBG() const {
+	ShapeRender::renderTiledBG(*window_, Config::bgOffX(), Config::bgOffY(), Config::bgScale());
+}
 
 
 void TitleView::renderLetters(const std::vector<std::vector<uint8_t>> & map, float percentage) const {
