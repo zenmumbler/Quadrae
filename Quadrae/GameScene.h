@@ -12,6 +12,7 @@
 #include <SFML/Graphics.hpp>
 #include "Scene.h"
 #include "Common.h"
+#include "RandomGenerator.h"
 #include "PlayField.h"
 #include "GameView.h"
 
@@ -36,6 +37,7 @@ class GameScene : public Scene {
 	GameView view_;
 	PlayField field_;
 	Phase phase_, savePhase_;
+	RandomGenerator pieceGen_;
 
 	Time::Duration tickInterval_, horizInterval_, dropInterval_;
 	Time::Duration initialDelay_, afterLockDelay_;

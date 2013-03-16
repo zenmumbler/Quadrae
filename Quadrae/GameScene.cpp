@@ -44,7 +44,7 @@ void GameScene::activate() {
 	phase_ = Phase::PieceFall;
 
 	piece_ = ShapeType::None;
-	nextPiece_ = randomShapeType();
+	nextPiece_ = pieceGen_.next();
 	direction_ = Direction::None;
 	
 	nextPiece();
@@ -203,7 +203,7 @@ void GameScene::handleCompletedLines() {
 
 void GameScene::nextPiece() {
 	piece_ = nextPiece_;
-	nextPiece_ = randomShapeType();
+	nextPiece_ = pieceGen_.next();
 	
 	pieceRow_ = -1; pieceCol_ = 3;
 	pieceRot_ = 40000;

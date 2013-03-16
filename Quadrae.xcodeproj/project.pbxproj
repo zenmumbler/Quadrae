@@ -17,6 +17,7 @@
 		8E16B02316DC38D2006BA148 /* GameView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B02116DC38D2006BA148 /* GameView.cpp */; };
 		8E16B02616DC4210006BA148 /* PlayField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B02416DC4210006BA148 /* PlayField.cpp */; };
 		8E2BA0CB16F4944C009F4655 /* BGRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BA0C916F4944C009F4655 /* BGRender.cpp */; };
+		8E2BA0CE16F510DF009F4655 /* RandomGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BA0CC16F510DF009F4655 /* RandomGenerator.cpp */; };
 		8E6D2C1216E4F160008FCBFE /* Shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1016E4F160008FCBFE /* Shape.cpp */; };
 		8E6D2C1716E943E1008FCBFE /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1616E943E1008FCBFE /* Scene.cpp */; };
 		8E6D2C1A16E94B02008FCBFE /* TitleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1816E94B02008FCBFE /* TitleScene.cpp */; };
@@ -55,6 +56,8 @@
 		8E16B02516DC4210006BA148 /* PlayField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayField.h; sourceTree = "<group>"; };
 		8E2BA0C916F4944C009F4655 /* BGRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BGRender.cpp; sourceTree = "<group>"; };
 		8E2BA0CA16F4944C009F4655 /* BGRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGRender.h; sourceTree = "<group>"; };
+		8E2BA0CC16F510DF009F4655 /* RandomGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RandomGenerator.cpp; sourceTree = "<group>"; };
+		8E2BA0CD16F510DF009F4655 /* RandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomGenerator.h; sourceTree = "<group>"; };
 		8E6D2C1016E4F160008FCBFE /* Shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shape.cpp; sourceTree = "<group>"; };
 		8E6D2C1116E4F160008FCBFE /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
 		8E6D2C1416E93FCE008FCBFE /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 			children = (
 				8E16B01E16DC30C8006BA148 /* Common.cpp */,
 				8E16B01F16DC30C8006BA148 /* Common.h */,
+				8E2BA0CC16F510DF009F4655 /* RandomGenerator.cpp */,
+				8E2BA0CD16F510DF009F4655 /* RandomGenerator.h */,
 				8E6D2C1E16ED2009008FCBFE /* Assets.cpp */,
 				8E6D2C1F16ED2009008FCBFE /* Assets.h */,
 				8E6D2C2716ED43A3008FCBFE /* Config.cpp */,
@@ -234,6 +239,7 @@
 				8E6D2C2616ED32F0008FCBFE /* ShapeRender.cpp in Sources */,
 				8E6D2C2916ED43A3008FCBFE /* Config.cpp in Sources */,
 				8E2BA0CB16F4944C009F4655 /* BGRender.cpp in Sources */,
+				8E2BA0CE16F510DF009F4655 /* RandomGenerator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

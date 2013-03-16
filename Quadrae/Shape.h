@@ -22,8 +22,6 @@ enum class ShapeType {
 	Bar        = 7,
 };
 
-ShapeType randomShapeType();
-
 
 class Tile {
 	uint8_t data_;

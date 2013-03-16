@@ -12,11 +12,6 @@
 #include "Common.h"
 
 
-ShapeType randomShapeType() {
-	return static_cast<ShapeType>(Random::intInRange(1, 7));
-}
-
-
 Shape::Shape(size_t cols, size_t rows)
 	: data_(rows)
 {
