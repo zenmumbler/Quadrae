@@ -18,7 +18,7 @@
 #include "TitleView.h"
 
 
-class Title : public Scene {
+class TitleScene : public Scene {
 	enum Phase {
 		None = 0,
 		Wait1,
@@ -36,7 +36,7 @@ class Title : public Scene {
 	void trySetBaseLevel(int newLevel) const;
 
 public:
-	Title(const std::shared_ptr<sf::RenderWindow> & window);
+	TitleScene(const std::shared_ptr<sf::RenderWindow> & window);
 	
 	virtual void handleEvent(const sf::Event & event) override;
 	

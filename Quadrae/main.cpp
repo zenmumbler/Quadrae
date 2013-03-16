@@ -57,7 +57,7 @@ static bool init() {
 	Config::load();
 	
 	// set up scenes
-	Scenes::add("title", std::make_shared<Title>(window_s));
+	Scenes::add("title", std::make_shared<TitleScene>(window_s));
 	Scenes::add("game", std::make_shared<GameScene>(window_s));
 	Scenes::setCurrent("title");
 	

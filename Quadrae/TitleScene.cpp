@@ -10,7 +10,7 @@
 #include "TitleScene.h"
 
 
-Title::Title(const std::shared_ptr<sf::RenderWindow> & window)
+TitleScene::TitleScene(const std::shared_ptr<sf::RenderWindow> & window)
 	: Scene(window)
 	, view_(window)
 	, phase_(Phase::None)
@@ -25,12 +25,12 @@ Title::Title(const std::shared_ptr<sf::RenderWindow> & window)
 }
 
 
-void Title::trySetBaseLevel(int newLevel) const {
+void TitleScene::trySetBaseLevel(int newLevel) const {
 	Config::setBaseLevel(std::min(9, std::max(0, newLevel)));
 }
 
 
-void Title::handleEvent(const sf::Event & event) {
+void TitleScene::handleEvent(const sf::Event & event) {
 	if (event.Type == sf::Event::KeyPressed) {
 		if (phase_ == Phase::UILoop) {
 			if (event.Key.Code == sf::Key::Left)
@@ -55,7 +55,7 @@ void Title::handleEvent(const sf::Event & event) {
 }
 
 
-void Title::nextPhase() {
+void TitleScene::nextPhase() {
 	phase_++;
 	lastAction_ = Time::now();
 
@@ -68,25 +68,27 @@ void Title::nextPhase() {
 }
 
 
-void Title::activate() {
+void TitleScene::activate() {
 	phase_ = Phase::None;
 	nextPhase();
 }
 
 
-void Title::suspend() {
+void TitleScene::suspend() {
 }
 
 
-void Title::frame() {
+void TitleScene::frame() {
 	view_.renderBG();
 
 	if (Time::now() > nextAction_)
 		nextPhase();
 
+	auto ms = Time::msSince(lastAction_);
+
 	float letterPtc = 1.0f;
 	if (phase_ == Phase::LetterDrop) {
-		letterPtc = std::min(1.0f, Time::msSince(lastAction_) / 1000.f);
+		letterPtc = std::min(1.0f, ms / 1000.f);
 		if (letterPtc == 1.0f)
 			nextPhase();
 	}
@@ -97,7 +99,6 @@ void Title::frame() {
 	if (phase_ == Phase::UILoop) {
 		view_.renderCopyright();
 
-		auto ms = Time::msSince(lastAction_);
 		if (ms & 1024)
 			view_.renderPressStart();
 		
