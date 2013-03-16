@@ -7,9 +7,9 @@
 //
 
 #include <cmath>
-#include "Config.h"
 #include "Assets.h"
 #include "ShapeRender.h"
+#include "BGRender.h"
 #include "TitleView.h"
 
 TitleView::TitleView(const std::shared_ptr<sf::RenderWindow> & window)
@@ -18,7 +18,7 @@ TitleView::TitleView(const std::shared_ptr<sf::RenderWindow> & window)
 
 
 void TitleView::renderBG() const {
-	ShapeRender::renderTiledBG(*window_, Config::bgOffX(), Config::bgOffY(), Config::bgScale());
+	BGRender::renderStep(*window_);
 }
 
 

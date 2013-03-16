@@ -13,9 +13,6 @@
 namespace Config {
 	static int baseLevel_s = 0;
 	static KeyBinding keys_s;
-	static float bgOffX_s = 0.f;
-	static float bgOffY_s = 0.f;
-	static float bgScale_s = 1.f;
 	
 	KeyBinding keys() { return keys_s; }
 	
@@ -35,22 +32,4 @@ namespace Config {
 		
 		baseLevel_s = 8;
 	}
-	
-	
-	void stepBGAnim() {
-		using namespace std::chrono;
-		using std::sinf; using std::cosf;
-		
-		float t = duration_cast<microseconds>(Time::now().time_since_epoch()).count() / 1000000.f;
-		const float displace = 400.f;
-		
-		bgOffX_s = displace * (cosf(t / 15.f));
-		bgOffY_s = displace * (sinf((t + 2.f) / 18.f));
-		bgScale_s = 1.f + (0.3f * sinf( (t / 14.f) ));
-	}
-	
-	float bgOffX() { return bgOffX_s; }
-	float bgOffY() { return bgOffY_s; }
-	float bgScale() { return bgScale_s; }
-
 }

@@ -7,9 +7,9 @@
 //
 
 #include <cmath>
-#include "Config.h"
 #include "Assets.h"
 #include "ShapeRender.h"
+#include "BGRender.h"
 #include "GameView.h"
 
 GameView::GameView(const std::shared_ptr<sf::RenderWindow> & window)
@@ -25,7 +25,7 @@ GameView::GameView(const std::shared_ptr<sf::RenderWindow> & window)
  */
 
 void GameView::renderBG() const {
-	ShapeRender::renderTiledBG(*window_, Config::bgOffX(), Config::bgOffY(), Config::bgScale());
+	BGRender::renderStep(*window_);
 
 	auto border = sf::Shape::Rectangle(23, 23, 23 + 242, 23 + 482, { 32,32,32, 240 }, 1.f, sf::Color::White);
 	window_->Draw(border);

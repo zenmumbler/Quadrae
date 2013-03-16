@@ -36,7 +36,6 @@ static void mainLoop() {
 	
 	while (running_s) {
 		Time::step();
-		Config::stepBGAnim();
 		handleEvents();
 		Scenes::current()->frame();
 		window_s->Display();
