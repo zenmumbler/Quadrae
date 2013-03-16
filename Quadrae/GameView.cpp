@@ -24,11 +24,31 @@ GameView::GameView(const std::shared_ptr<sf::RenderWindow> & window)
  
  */
 
+void GameView::renderBox(float x, float y, float w, float h, const std::string & title) const {
+	const float borderDim = 2.f;
+	auto box = sf::Shape::Rectangle(x - borderDim, y - borderDim, x + w + borderDim, y + h + borderDim,
+									{ 32,32,32, 240 }, borderDim, sf::Color::White);
+	window_->Draw(box);
+
+	sf::String c { title, Assets::font(), 24.f };
+	c.SetColor(sf::Color::Black);
+	c.SetCenter(c.GetRect().GetWidth() / 2.f, c.GetRect().GetHeight());
+	c.SetPosition(x + 29.f, y - 5.f);
+	window_->Draw(c);
+	c.SetColor(sf::Color::White);
+	c.SetPosition(x + 28.f, y - 6.f);
+	window_->Draw(c);
+}
+
+
 void GameView::renderBG() const {
 	BGRender::renderStep(*window_);
 
-	auto border = sf::Shape::Rectangle(23, 23, 23 + 242, 23 + 482, { 32,32,32, 240 }, 1.f, sf::Color::White);
-	window_->Draw(border);
+	renderBox(24.f, 24.f, 240.f, 480.f); // playfield
+
+	renderBox(286.f, 56.f, 104.f, 104.f, "NEXT");
+	renderBox(286.f, 240.f, 104.f, 94.f, "level");
+	renderBox(286.f, 370.f, 104.f, 94.f, "lines");
 }
 
 
@@ -67,7 +87,7 @@ void GameView::fadeClearedLines(const PlayField & field, float progress) const {
 
 
 void GameView::fadePlayField(float progress) const {
-	auto border = sf::Shape::Rectangle(24, 24, 24 + 240, 24 + 480, { 142,131,0, 255 * (1.0f-progress) });
+	auto border = sf::Shape::Rectangle(24, 24, 24 + 240, 24 + 480, { 142,131,0, 255 * (1.0f - progress) });
 	window_->Draw(border);
 }
 
@@ -76,12 +96,12 @@ void GameView::renderCounters(int level, int lines) const {
 	sf::String c { std::to_string(lines), Assets::font(), 36.f };
 	c.SetColor(sf::Color::White);
 	c.SetCenter(c.GetRect().GetWidth() / 2.f, c.GetRect().GetHeight());
-	c.SetPosition(344.f, 400.f);
+	c.SetPosition(338.f, 430.f);
 	window_->Draw(c);
 	
 	c.SetText(std::to_string(level));
 	c.SetCenter(c.GetRect().GetWidth() / 2.f, c.GetRect().GetHeight());
-	c.SetPosition(344.f, 300.f);
+	c.SetPosition(338.f, 300.f);
 	window_->Draw(c);
 }
 

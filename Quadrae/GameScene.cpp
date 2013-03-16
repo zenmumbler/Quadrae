@@ -316,5 +316,5 @@ void GameScene::frame() {
 	// next piece
 	if (phase_ == Phase::PieceFall || phase_ == Phase::ClearLines)
 		if (nextPiece_ != ShapeType::None)
-			view_.renderShape(shapeWithRotation(nextPiece_, 0), 300.f, 50.f);
+			view_.renderShape(shapeWithRotation(nextPiece_, 0), 292.f, 50.f);
 }

@@ -20,6 +20,8 @@ class GameView {
 
 public:
 	GameView(const std::shared_ptr<sf::RenderWindow> & window);
+	
+	void renderBox(float x, float y, float w, float h, const std::string & title = "") const;
 
 	void renderBG() const;
 	void renderCounters(int level, int lines) const;
