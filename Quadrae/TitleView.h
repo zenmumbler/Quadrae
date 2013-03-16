@@ -21,6 +21,9 @@ public:
 	TitleView(const std::shared_ptr<sf::RenderWindow> & window);
 
 	void renderBG() const;
+	void renderLevelBox(float x, float y, int level, bool selected) const;
+	void renderLevelSelect(int baseLevel, bool highlight) const;
+
 	void renderLetters(const std::vector<std::vector<uint8_t>> & map, float percentage) const;
 	void renderCopyright() const;
 	void renderPressStart() const;

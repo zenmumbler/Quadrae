@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Arthur Langereis. All rights reserved.
 //
 
+#include "Config.h"
 #include "TitleScene.h"
 
 
@@ -24,10 +25,32 @@ Title::Title(const std::shared_ptr<sf::RenderWindow> & window)
 }
 
 
+void Title::trySetBaseLevel(int newLevel) const {
+	Config::setBaseLevel(std::min(9, std::max(0, newLevel)));
+}
+
+
 void Title::handleEvent(const sf::Event & event) {
 	if (event.Type == sf::Event::KeyPressed) {
-		if (event.Key.Code == sf::Key::Return || event.Key.Code == sf::Key::Space)
-			Scenes::setCurrent("game");
+		if (phase_ == Phase::UILoop) {
+			if (event.Key.Code == sf::Key::Left)
+				trySetBaseLevel(Config::baseLevel() - 1);
+			else if (event.Key.Code == sf::Key::Right)
+				trySetBaseLevel(Config::baseLevel() + 1);
+			else if (event.Key.Code == sf::Key::Up)
+				trySetBaseLevel(Config::baseLevel() - 5);
+			else if (event.Key.Code == sf::Key::Down)
+				trySetBaseLevel(Config::baseLevel() + 5);
+		}
+			
+		if (event.Key.Code == sf::Key::Return || event.Key.Code == sf::Key::Space) {
+			if (phase_ != Phase::UILoop) {
+				// force phase change to final one
+				phase_ = Phase::Wait2;
+				nextPhase();
+			} else
+				Scenes::setCurrent("game");
+		}
 	}
 }
 
@@ -74,7 +97,10 @@ void Title::frame() {
 	if (phase_ == Phase::UILoop) {
 		view_.renderCopyright();
 
-		if (Time::msSince(lastAction_) & 1024)
+		auto ms = Time::msSince(lastAction_);
+		if (ms & 1024)
 			view_.renderPressStart();
+		
+		view_.renderLevelSelect(Config::baseLevel(), true);
 	}
 }

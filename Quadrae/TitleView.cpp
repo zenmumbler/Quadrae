@@ -22,6 +22,45 @@ void TitleView::renderBG() const {
 }
 
 
+void TitleView::renderLevelBox(float x, float y, int level, bool selected) const {
+	const float borderDim = 1.f;
+	const float dim = 58.f;
+
+	const sf::Color bgNormal { 0,0,0, 128 };
+	const sf::Color bgSelected = sf::Color::Green;
+	const sf::Color borderNormal { 32,32,32, 255 };
+	const sf::Color borderSelected { 0,128,0, 255 };
+	
+	auto & bgColor = (selected ? bgSelected : bgNormal);
+	auto & borderColor = (selected ? borderSelected : borderNormal);
+	
+	auto box = sf::Shape::Rectangle(x - borderDim, y - borderDim, x + dim + borderDim, y + dim + borderDim,
+									bgColor, borderDim, borderColor);
+	window_->Draw(box);
+
+	// draw level number with shadow in the center
+	sf::String c { std::to_string(level), Assets::font(), 24.f };
+	c.SetColor(sf::Color::Black);
+	c.SetCenter(c.GetRect().GetWidth() / 2.f, c.GetRect().GetHeight());
+	c.SetPosition(x + 30.f, y + 37.f);
+	window_->Draw(c);
+	c.SetColor(sf::Color::White);
+	c.SetPosition(x + 29.f, y + 36.f);
+	window_->Draw(c);
+}
+
+
+void TitleView::renderLevelSelect(int baseLevel, bool highlight) const {
+	const float baseX = 50.f;
+	const float baseY = 200.f;
+	const float boxDim = 60.f;
+
+	for (int i=0; i<10; i++) {
+		renderLevelBox(baseX + ((i%5) * boxDim), baseY + ((i/5) * boxDim), i, (i == baseLevel) && highlight);
+	}
+}
+
+
 void TitleView::renderLetters(const std::vector<std::vector<uint8_t>> & map, float percentage) const {
 	const float linePtcSeg = 1.0f / map.size();
 	

@@ -33,6 +33,7 @@ class Title : public Scene {
 	Time::Point lastAction_, nextAction_;
 	
 	void nextPhase();
+	void trySetBaseLevel(int newLevel) const;
 
 public:
 	Title(const std::shared_ptr<sf::RenderWindow> & window);
