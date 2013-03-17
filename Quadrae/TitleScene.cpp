@@ -7,6 +7,7 @@
 //
 
 #include "Config.h"
+#include "Assets.h"
 #include "TitleScene.h"
 
 
@@ -27,6 +28,7 @@ TitleScene::TitleScene(const std::shared_ptr<sf::RenderWindow> & window)
 
 void TitleScene::trySetBaseLevel(int newLevel) const {
 	Config::setBaseLevel(std::min(9, std::max(0, newLevel)));
+	Assets::playMove();
 }
 
 

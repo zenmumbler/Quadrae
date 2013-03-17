@@ -10,7 +10,7 @@
 #define __Quadrae__Assets__
 
 #include <SFML/Graphics.hpp>
-
+#include <SFML/Audio.hpp>
 
 namespace Assets {
 	bool loadAll();
@@ -19,6 +19,11 @@ namespace Assets {
 	const sf::Image & bgTexture();
 	
 	const sf::Font & font();
+	
+	void playMove();
+	void playLock();
+	void playClear();
+	void playClear4();
 };
 
 

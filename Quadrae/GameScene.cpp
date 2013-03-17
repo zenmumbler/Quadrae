@@ -7,6 +7,7 @@
 //
 
 #include "Config.h"
+#include "Assets.h"
 #include "GameScene.h"
 #include <cmath>
 
@@ -154,8 +155,10 @@ void GameScene::tryRotate(bool clockwise) {
 	else
 		tryRot--;
 	
-	if (field_.canFitShapeAt(shapeWithRotation(piece_, tryRot), pieceCol_, pieceRow_))
+	if (field_.canFitShapeAt(shapeWithRotation(piece_, tryRot), pieceCol_, pieceRow_)) {
+		Assets::playMove();
 		pieceRot_ = tryRot;
+	}
 }
 
 
@@ -182,6 +185,8 @@ void GameScene::tryMove(Direction dir) {
 		
 		if (movedDown)
 			nextTick_ = Time::now() + tickInterval_;
+		else
+			Assets::playMove();
 	}
 }
 
@@ -232,8 +237,14 @@ void GameScene::tick() {
 			}
 			else {
 				field_.placeShapeAt(shape, pieceCol_, pieceRow_);
+				Assets::playLock();
 				
 				if (field_.completedLines().size()) {
+					if (field_.completedLines().size() == 4)
+						Assets::playClear4();
+					else
+						Assets::playClear();
+					
 					phase_ = Phase::ClearLines;
 					nextTick_ = Time::now() + clearLineAnimDuration_;
 				}
