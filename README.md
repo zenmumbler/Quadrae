@@ -47,3 +47,5 @@ source code.
 
 If you like Quadrae, please visit
 [the official Tetris website](http://tetris.com/) and find a game to play there.
+
+The background and piece textures were taken from: [http://www.vectortiles.com/tetris-seamless-tiles/]()
