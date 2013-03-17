@@ -29,13 +29,13 @@ namespace Assets {
 		bool ok = true;
 		
 		if (ok) ok = font_s.LoadFromFile("/Library/Fonts/Arial.ttf");
-		if (ok)	ok = tilesTex_s.LoadFromFile("texture.png");
-		if (ok)	ok = bgTex_s.LoadFromFile("bg.png");
+		if (ok)	ok = tilesTex_s.LoadFromFile("data/texture.png");
+		if (ok)	ok = bgTex_s.LoadFromFile("data/bg.png");
 		
-		if (ok)	ok = moveBuf_s.LoadFromFile("move.wav");
-		if (ok)	ok = lockBuf_s.LoadFromFile("lock.wav");
-		if (ok)	ok = clearBuf_s.LoadFromFile("clear.wav");
-		if (ok)	ok = clear4Buf_s.LoadFromFile("clear4.wav");
+		if (ok)	ok = moveBuf_s.LoadFromFile("data/move.wav");
+		if (ok)	ok = lockBuf_s.LoadFromFile("data/lock.wav");
+		if (ok)	ok = clearBuf_s.LoadFromFile("data/clear.wav");
+		if (ok)	ok = clear4Buf_s.LoadFromFile("data/clear4.wav");
 		
 		if (ok) {
 			tilesTex_s.SetSmooth(false);

@@ -18,6 +18,37 @@
 		8E16B02616DC4210006BA148 /* PlayField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B02416DC4210006BA148 /* PlayField.cpp */; };
 		8E2BA0CB16F4944C009F4655 /* BGRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BA0C916F4944C009F4655 /* BGRender.cpp */; };
 		8E2BA0CE16F510DF009F4655 /* RandomGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BA0CC16F510DF009F4655 /* RandomGenerator.cpp */; };
+		8E2BA12116F641A3009F4655 /* Quadrae.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8E2BA0EE16F63C88009F4655 /* Quadrae.icns */; };
+		8E2BA12316F641D6009F4655 /* bg.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E2BA0E916F63C88009F4655 /* bg.png */; };
+		8E2BA12416F641D8009F4655 /* clear.wav in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E2BA0EA16F63C88009F4655 /* clear.wav */; };
+		8E2BA12516F641DC009F4655 /* lock.wav in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E2BA0EC16F63C88009F4655 /* lock.wav */; };
+		8E2BA12616F641E0009F4655 /* move.wav in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E2BA0ED16F63C88009F4655 /* move.wav */; };
+		8E2BA12716F641E6009F4655 /* texture.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E2BA0EF16F63C88009F4655 /* texture.png */; };
+		8E2BA12816F641EE009F4655 /* clear4.wav in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E2BA0EB16F63C88009F4655 /* clear4.wav */; };
+		8E2BA12A16F64242009F4655 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B01E16DC30C8006BA148 /* Common.cpp */; };
+		8E2BA12B16F64242009F4655 /* RandomGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BA0CC16F510DF009F4655 /* RandomGenerator.cpp */; };
+		8E2BA12C16F64242009F4655 /* Assets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1E16ED2009008FCBFE /* Assets.cpp */; };
+		8E2BA12D16F64242009F4655 /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C2716ED43A3008FCBFE /* Config.cpp */; };
+		8E2BA12E16F64242009F4655 /* ShapeRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C2416ED32F0008FCBFE /* ShapeRender.cpp */; };
+		8E2BA12F16F64242009F4655 /* BGRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BA0C916F4944C009F4655 /* BGRender.cpp */; };
+		8E2BA13016F64242009F4655 /* Shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1016E4F160008FCBFE /* Shape.cpp */; };
+		8E2BA13116F64242009F4655 /* PlayField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B02416DC4210006BA148 /* PlayField.cpp */; };
+		8E2BA13216F64242009F4655 /* TitleView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1B16E95D84008FCBFE /* TitleView.cpp */; };
+		8E2BA13316F64242009F4655 /* GameView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B02116DC38D2006BA148 /* GameView.cpp */; };
+		8E2BA13416F64242009F4655 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1616E943E1008FCBFE /* Scene.cpp */; };
+		8E2BA13516F64242009F4655 /* TitleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1816E94B02008FCBFE /* TitleScene.cpp */; };
+		8E2BA13616F64242009F4655 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B01A16DBE87D006BA148 /* GameScene.cpp */; };
+		8E2BA13716F64242009F4655 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E16B00816DBDCBA006BA148 /* main.cpp */; };
+		8E2BA13816F6425D009F4655 /* sfml-audio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E16B01116DBDCFF006BA148 /* sfml-audio.framework */; };
+		8E2BA13916F6425F009F4655 /* sfml-graphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E16B01216DBDCFF006BA148 /* sfml-graphics.framework */; };
+		8E2BA13A16F64261009F4655 /* sfml-system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E16B01316DBDCFF006BA148 /* sfml-system.framework */; };
+		8E2BA13B16F64263009F4655 /* sfml-window.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E16B01416DBDCFF006BA148 /* sfml-window.framework */; };
+		8E2BA13C16F6427C009F4655 /* sfml-audio.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E16B01116DBDCFF006BA148 /* sfml-audio.framework */; };
+		8E2BA13D16F6427F009F4655 /* sfml-graphics.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E16B01216DBDCFF006BA148 /* sfml-graphics.framework */; };
+		8E2BA13E16F64282009F4655 /* sfml-system.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E16B01316DBDCFF006BA148 /* sfml-system.framework */; };
+		8E2BA13F16F64284009F4655 /* sfml-window.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E16B01416DBDCFF006BA148 /* sfml-window.framework */; };
+		8E2BA14616F646BC009F4655 /* sndfile.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E2BA14416F64527009F4655 /* sndfile.framework */; };
+		8E2BA14716F646C0009F4655 /* libfreetype.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E2BA14516F6460B009F4655 /* libfreetype.dylib */; };
 		8E6D2C1216E4F160008FCBFE /* Shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1016E4F160008FCBFE /* Shape.cpp */; };
 		8E6D2C1716E943E1008FCBFE /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1616E943E1008FCBFE /* Scene.cpp */; };
 		8E6D2C1A16E94B02008FCBFE /* TitleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D2C1816E94B02008FCBFE /* TitleScene.cpp */; };
@@ -36,6 +67,36 @@
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
+		};
+		8E2BA12216F641CB009F4655 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = data;
+			dstSubfolderSpec = 7;
+			files = (
+				8E2BA12316F641D6009F4655 /* bg.png in CopyFiles */,
+				8E2BA12716F641E6009F4655 /* texture.png in CopyFiles */,
+				8E2BA12616F641E0009F4655 /* move.wav in CopyFiles */,
+				8E2BA12416F641D8009F4655 /* clear.wav in CopyFiles */,
+				8E2BA12816F641EE009F4655 /* clear4.wav in CopyFiles */,
+				8E2BA12516F641DC009F4655 /* lock.wav in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E2BA12916F64215009F4655 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8E2BA14716F646C0009F4655 /* libfreetype.dylib in CopyFiles */,
+				8E2BA14616F646BC009F4655 /* sndfile.framework in CopyFiles */,
+				8E2BA13C16F6427C009F4655 /* sfml-audio.framework in CopyFiles */,
+				8E2BA13F16F64284009F4655 /* sfml-window.framework in CopyFiles */,
+				8E2BA13D16F6427F009F4655 /* sfml-graphics.framework in CopyFiles */,
+				8E2BA13E16F64282009F4655 /* sfml-system.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -58,6 +119,21 @@
 		8E2BA0CA16F4944C009F4655 /* BGRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGRender.h; sourceTree = "<group>"; };
 		8E2BA0CC16F510DF009F4655 /* RandomGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RandomGenerator.cpp; sourceTree = "<group>"; };
 		8E2BA0CD16F510DF009F4655 /* RandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomGenerator.h; sourceTree = "<group>"; };
+		8E2BA0E916F63C88009F4655 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = assets/bg.png; sourceTree = "<group>"; };
+		8E2BA0EA16F63C88009F4655 /* clear.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = clear.wav; path = assets/clear.wav; sourceTree = "<group>"; };
+		8E2BA0EB16F63C88009F4655 /* clear4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = clear4.wav; path = assets/clear4.wav; sourceTree = "<group>"; };
+		8E2BA0EC16F63C88009F4655 /* lock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = lock.wav; path = assets/lock.wav; sourceTree = "<group>"; };
+		8E2BA0ED16F63C88009F4655 /* move.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = move.wav; path = assets/move.wav; sourceTree = "<group>"; };
+		8E2BA0EE16F63C88009F4655 /* Quadrae.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Quadrae.icns; path = assets/Quadrae.icns; sourceTree = "<group>"; };
+		8E2BA0EF16F63C88009F4655 /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = texture.png; path = assets/texture.png; sourceTree = "<group>"; };
+		8E2BA10116F63F7A009F4655 /* QuadraeBundle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuadraeBundle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E2BA10316F63F7A009F4655 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		8E2BA10616F63F7A009F4655 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		8E2BA10716F63F7A009F4655 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		8E2BA10816F63F7A009F4655 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8E2BA10B16F63F7A009F4655 /* QuadraeBundle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "QuadraeBundle-Info.plist"; sourceTree = "<group>"; };
+		8E2BA14416F64527009F4655 /* sndfile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sndfile.framework; path = ../../../Library/Frameworks/sndfile.framework; sourceTree = "<group>"; };
+		8E2BA14516F6460B009F4655 /* libfreetype.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.dylib; path = ../lib/libfreetype.dylib; sourceTree = "<group>"; };
 		8E6D2C1016E4F160008FCBFE /* Shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shape.cpp; sourceTree = "<group>"; };
 		8E6D2C1116E4F160008FCBFE /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
 		8E6D2C1416E93FCE008FCBFE /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
@@ -86,6 +162,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8E2BA0FE16F63F7A009F4655 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E2BA13816F6425D009F4655 /* sfml-audio.framework in Frameworks */,
+				8E2BA13916F6425F009F4655 /* sfml-graphics.framework in Frameworks */,
+				8E2BA13A16F64261009F4655 /* sfml-system.framework in Frameworks */,
+				8E2BA13B16F64263009F4655 /* sfml-window.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -93,7 +180,11 @@
 			isa = PBXGroup;
 			children = (
 				8E16B01916DBDD04006BA148 /* SFML */,
+				8E2BA0EE16F63C88009F4655 /* Quadrae.icns */,
+				8E2BA0F716F63C90009F4655 /* data */,
 				8E16B00716DBDCBA006BA148 /* Quadrae */,
+				8E2BA10916F63F7A009F4655 /* QuadraeBundle */,
+				8E2BA10216F63F7A009F4655 /* Frameworks */,
 				8E16B00616DBDCBA006BA148 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				8E16B00516DBDCBA006BA148 /* Quadrae */,
+				8E2BA10116F63F7A009F4655 /* QuadraeBundle.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,12 +224,62 @@
 		8E16B01916DBDD04006BA148 /* SFML */ = {
 			isa = PBXGroup;
 			children = (
+				8E2BA14516F6460B009F4655 /* libfreetype.dylib */,
+				8E2BA14416F64527009F4655 /* sndfile.framework */,
 				8E16B01116DBDCFF006BA148 /* sfml-audio.framework */,
 				8E16B01216DBDCFF006BA148 /* sfml-graphics.framework */,
 				8E16B01316DBDCFF006BA148 /* sfml-system.framework */,
 				8E16B01416DBDCFF006BA148 /* sfml-window.framework */,
 			);
 			name = SFML;
+			sourceTree = "<group>";
+		};
+		8E2BA0F716F63C90009F4655 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				8E2BA0E916F63C88009F4655 /* bg.png */,
+				8E2BA0EA16F63C88009F4655 /* clear.wav */,
+				8E2BA0EB16F63C88009F4655 /* clear4.wav */,
+				8E2BA0EC16F63C88009F4655 /* lock.wav */,
+				8E2BA0ED16F63C88009F4655 /* move.wav */,
+				8E2BA0EF16F63C88009F4655 /* texture.png */,
+			);
+			name = data;
+			sourceTree = "<group>";
+		};
+		8E2BA10216F63F7A009F4655 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E2BA10316F63F7A009F4655 /* Cocoa.framework */,
+				8E2BA10516F63F7A009F4655 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8E2BA10516F63F7A009F4655 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E2BA10616F63F7A009F4655 /* AppKit.framework */,
+				8E2BA10716F63F7A009F4655 /* CoreData.framework */,
+				8E2BA10816F63F7A009F4655 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		8E2BA10916F63F7A009F4655 /* QuadraeBundle */ = {
+			isa = PBXGroup;
+			children = (
+				8E2BA10A16F63F7A009F4655 /* Supporting Files */,
+			);
+			path = QuadraeBundle;
+			sourceTree = "<group>";
+		};
+		8E2BA10A16F63F7A009F4655 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8E2BA10B16F63F7A009F4655 /* QuadraeBundle-Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		8E6D2C2116ED25ED008FCBFE /* Views */ = {
@@ -195,6 +337,25 @@
 			productReference = 8E16B00516DBDCBA006BA148 /* Quadrae */;
 			productType = "com.apple.product-type.tool";
 		};
+		8E2BA10016F63F7A009F4655 /* QuadraeBundle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E2BA11B16F63F7A009F4655 /* Build configuration list for PBXNativeTarget "QuadraeBundle" */;
+			buildPhases = (
+				8E2BA0FD16F63F7A009F4655 /* Sources */,
+				8E2BA0FE16F63F7A009F4655 /* Frameworks */,
+				8E2BA0FF16F63F7A009F4655 /* Resources */,
+				8E2BA12216F641CB009F4655 /* CopyFiles */,
+				8E2BA12916F64215009F4655 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuadraeBundle;
+			productName = QuadraeBundle;
+			productReference = 8E2BA10116F63F7A009F4655 /* QuadraeBundle.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -217,9 +378,21 @@
 			projectRoot = "";
 			targets = (
 				8E16B00416DBDCBA006BA148 /* Quadrae */,
+				8E2BA10016F63F7A009F4655 /* QuadraeBundle */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8E2BA0FF16F63F7A009F4655 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E2BA12116F641A3009F4655 /* Quadrae.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8E16B00116DBDCBA006BA148 /* Sources */ = {
@@ -240,6 +413,27 @@
 				8E6D2C2916ED43A3008FCBFE /* Config.cpp in Sources */,
 				8E2BA0CB16F4944C009F4655 /* BGRender.cpp in Sources */,
 				8E2BA0CE16F510DF009F4655 /* RandomGenerator.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E2BA0FD16F63F7A009F4655 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E2BA12A16F64242009F4655 /* Common.cpp in Sources */,
+				8E2BA12B16F64242009F4655 /* RandomGenerator.cpp in Sources */,
+				8E2BA12C16F64242009F4655 /* Assets.cpp in Sources */,
+				8E2BA12D16F64242009F4655 /* Config.cpp in Sources */,
+				8E2BA12E16F64242009F4655 /* ShapeRender.cpp in Sources */,
+				8E2BA12F16F64242009F4655 /* BGRender.cpp in Sources */,
+				8E2BA13016F64242009F4655 /* Shape.cpp in Sources */,
+				8E2BA13116F64242009F4655 /* PlayField.cpp in Sources */,
+				8E2BA13216F64242009F4655 /* TitleView.cpp in Sources */,
+				8E2BA13316F64242009F4655 /* GameView.cpp in Sources */,
+				8E2BA13416F64242009F4655 /* Scene.cpp in Sources */,
+				8E2BA13516F64242009F4655 /* TitleScene.cpp in Sources */,
+				8E2BA13616F64242009F4655 /* GameScene.cpp in Sources */,
+				8E2BA13716F64242009F4655 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +549,34 @@
 			};
 			name = Release;
 		};
+		8E2BA11C16F63F7A009F4655 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Frameworks\"",
+				);
+				INFOPLIST_FILE = "QuadraeBundle/QuadraeBundle-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8E2BA11D16F63F7A009F4655 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Frameworks\"",
+				);
+				INFOPLIST_FILE = "QuadraeBundle/QuadraeBundle-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -375,6 +597,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		8E2BA11B16F63F7A009F4655 /* Build configuration list for PBXNativeTarget "QuadraeBundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E2BA11C16F63F7A009F4655 /* Debug */,
+				8E2BA11D16F63F7A009F4655 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
