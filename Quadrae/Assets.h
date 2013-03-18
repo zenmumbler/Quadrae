@@ -17,9 +17,9 @@ namespace Assets {
 
 	const sf::Image & tileTexture();
 	const sf::Image & bgTexture();
-	
+
 	const sf::Font & font();
-	
+
 	void playMove();
 	void playLock();
 	void playClear();

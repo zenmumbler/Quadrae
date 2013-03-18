@@ -9,6 +9,7 @@
 #ifndef __Quadrae__Shape__
 #define __Quadrae__Shape__
 
+#include <cstdint>
 #include <vector>
 
 enum class ShapeType {
@@ -30,18 +31,18 @@ public:
 	constexpr Tile() : data_(0) {}
 	constexpr Tile(uint8_t val) : data_(val) {}
 	constexpr Tile(const Tile & rhs) : data_(rhs.data_) {}
-	
+
 	Tile & operator=(const Tile & rhs) { data_ = rhs.data_; return *this; }
 	Tile & operator=(uint8_t val) { data_ = val; return *this; }
-	
+
 	constexpr bool occupied() { return type() != ShapeType::None; }
-	
+
 	constexpr ShapeType type() { return static_cast<ShapeType>(data_ & 7); }
 	Tile & setType(ShapeType type) { data_ = (data_ & ~7) | static_cast<uint8_t>(type); return *this; }
-	
+
 	constexpr size_t rotation() { return (data_ >> 3) & 3; }
 	Tile & setRotation(size_t rot) { data_ = (data_ & ~24) | ((rot & 3) << 3); return *this; }
-	
+
 	constexpr size_t segment() { return (data_ >> 5) & 3; }
 	Tile & setSegment(size_t seg) { data_ = (data_ & ~96) | ((seg & 3) << 5); return *this; }
 };
@@ -49,17 +50,17 @@ public:
 
 class Shape {
 	std::vector<std::vector<Tile>> data_;
-	
+
 public:
 	using Row = std::vector<Tile>;
-	
+
 	Shape(size_t cols, size_t rows);
 	Shape(const std::vector<std::vector<Tile>> & data) : data_(data) {}
 	Shape(const std::initializer_list<Row> init) : data_(init) {}
-	
+
 	size_t rows() const { return data_.size(); }
 	size_t cols() const { return data_[0].size(); }
-	
+
 	Tile & at(size_t col, size_t row);
 	Tile at(size_t col, size_t row) const;
 
@@ -67,7 +68,7 @@ public:
 	const Row & row(size_t row) const { return data_.at(row); }
 
 	Shape rotateCW(int pivotX, int pivotY) const;
-	
+
 	decltype(data_)::iterator begin() { return data_.begin(); }
 	decltype(data_)::iterator end() { return data_.end(); }
 

@@ -44,7 +44,7 @@ void TitleScene::handleEvent(const sf::Event & event) {
 			else if (event.Key.Code == sf::Key::Down)
 				trySetBaseLevel(Config::baseLevel() + 5);
 		}
-			
+
 		if (event.Key.Code == sf::Key::Return || event.Key.Code == sf::Key::Space) {
 			if (phase_ != Phase::UILoop) {
 				// force phase change to final one
@@ -58,7 +58,7 @@ void TitleScene::handleEvent(const sf::Event & event) {
 
 
 void TitleScene::nextPhase() {
-	phase_++;
+	phase_ = static_cast<Phase>(phase_ + 1);
 	lastAction_ = Time::now();
 
 	if (phase_ == Phase::Wait1)
@@ -103,7 +103,7 @@ void TitleScene::frame() {
 
 		if (ms & 1024)
 			view_.renderPressStart();
-		
+
 		view_.renderLevelSelect(Config::baseLevel(), true);
 	}
 }

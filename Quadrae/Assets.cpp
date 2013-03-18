@@ -17,7 +17,7 @@ namespace Assets {
 
 	const sf::Image & tileTexture() { return tilesTex_s; }
 	const sf::Image & bgTexture() { return bgTex_s; }
-	
+
 	const sf::Font & font() { return font_s; }
 
 	void playMove() { moveSnd_s.Play(); }
@@ -27,16 +27,20 @@ namespace Assets {
 
 	bool loadAll() {
 		bool ok = true;
-		
+
+#if __APPLE__
 		if (ok) ok = font_s.LoadFromFile("/Library/Fonts/Arial.ttf");
+#else
+		if (ok) ok = font_s.LoadFromFile("data/arial.ttf");
+#endif
 		if (ok)	ok = tilesTex_s.LoadFromFile("data/texture.png");
 		if (ok)	ok = bgTex_s.LoadFromFile("data/bg.png");
-		
+
 		if (ok)	ok = moveBuf_s.LoadFromFile("data/move.wav");
 		if (ok)	ok = lockBuf_s.LoadFromFile("data/lock.wav");
 		if (ok)	ok = clearBuf_s.LoadFromFile("data/clear.wav");
 		if (ok)	ok = clear4Buf_s.LoadFromFile("data/clear4.wav");
-		
+
 		if (ok) {
 			tilesTex_s.SetSmooth(false);
 
