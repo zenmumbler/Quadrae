@@ -17,7 +17,6 @@ namespace BGRender {
 	static float bgOffY_s = 0.f;
 	static float bgScale_s = 1.f;
 
-	// not really shape-related, but I can't be arsed to create a new file for this
 	static void render(sf::RenderTarget & rt, float x, float y, float scale) {
 		auto & bg = Assets::bgTexture();
 		float scaledWidth = bg.GetWidth() * scale;
