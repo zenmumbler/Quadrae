@@ -31,7 +31,7 @@ Building and Running
 --------------------
 
 Quadrae currently includes project files for Xcode and Code::Blocks.
-Xcode is used to make the Mac versions Code::Blocks is used for
+Xcode is used to make the Mac versions and Code::Blocks is used for
 Windows builds. There should be no direct problems with creating a
 Linux build but I have not done so as of yet.
 
