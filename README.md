@@ -30,6 +30,11 @@ Esc: exit current game
 Building and Running
 --------------------
 
+Quadrae currently includes project files for Xcode and Code::Blocks.
+Xcode is used to make the Mac versions Code::Blocks is used for
+Windows builds. There should be no direct problems with creating a
+Linux build but I have not done so as of yet.
+
 Quadrae uses the [SFML 1.6 framework](http://sfml-dev.org/download.php)
 which you will have to download and build separately. Add or change the
 references to the frameworks/libraries in your project and compile.
