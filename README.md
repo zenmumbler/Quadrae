@@ -27,6 +27,26 @@ Return: toggle pause<br>
 Esc: exit current game
 
 
+Building and Running
+--------------------
+
+Quadrae uses the [SFML 1.6 framework](http://sfml-dev.org/download.php)
+which you will have to download and build separately. Add or change the
+references to the frameworks/libraries in your project and compile.
+
+The Xcode project has a Bundle target that will create the full
+.app bundle and will also update the app binary to link to the frameworks
+contained within the bundle.
+
+For non-bundle versions of the app you will have to have the frameworks
+accessible (any of your Frameworks folders) and the libraries next to the
+app or in a folder in your (DY)LD_LIBRARY_PATH depending on your OS.
+
+Additionaly, the stand-alone binaries need the data folder with the
+textures and sound files to be in the same directory. The non-Mac versions
+also need the Arial.ttf file included in the data folder.
+
+
 Legal
 -----
 
