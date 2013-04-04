@@ -346,6 +346,7 @@
 				8E2BA0FF16F63F7A009F4655 /* Resources */,
 				8E2BA12216F641CB009F4655 /* CopyFiles */,
 				8E2BA12916F64215009F4655 /* CopyFiles */,
+				8E40AB2B170D8C7800054470 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -393,6 +394,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8E40AB2B170D8C7800054470 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Update library paths\"\ninstall_name_tool -change usr/local/lib/libfreetype.dylib @executable_path/../Frameworks/libfreetype.dylib $TARGET_BUILD_DIR/QuadraeBundle.app/Contents/Frameworks/sfml-graphics.framework/Versions/Current/sfml-graphics";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8E16B00116DBDCBA006BA148 /* Sources */ = {
@@ -605,6 +622,7 @@
 				8E2BA11D16F63F7A009F4655 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -36,7 +36,8 @@ references to the frameworks/libraries in your project and compile.
 
 The Xcode project has a Bundle target that will create the full
 .app bundle and will also update the app binary to link to the frameworks
-contained within the bundle.
+contained within the bundle. However, you may need to modify / amend that
+build phase as it is all absolute paths and other horribleness.
 
 For non-bundle versions of the app you will have to have the frameworks
 accessible (any of your Frameworks folders) and the libraries next to the
