@@ -8,6 +8,8 @@
 	<string>QuadraeBundle</string>
 	<key>CFBundleGetInfoString</key>
 	<string>Quadrae © 2013 logic-dream</string>
+	<key>CFBundleIconFile</key>
+	<string>Quadrae.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.logic-dream.quadrae</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -22,7 +24,7 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
-	<key>CFBundleIconFile</key>
-	<string>Quadrae.icns</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.puzzle-games</string>
 </dict>
 </plist>

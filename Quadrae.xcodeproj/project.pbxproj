@@ -101,6 +101,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8E111186171322A800C923FE /* QuadraeBundle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = QuadraeBundle.entitlements; sourceTree = "<group>"; };
 		8E16B00516DBDCBA006BA148 /* Quadrae */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Quadrae; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E16B00816DBDCBA006BA148 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8E16B01116DBDCFF006BA148 /* sfml-audio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-audio.framework"; path = "../../../Library/Frameworks/sfml-audio.framework"; sourceTree = "<group>"; };
@@ -269,6 +270,7 @@
 		8E2BA10916F63F7A009F4655 /* QuadraeBundle */ = {
 			isa = PBXGroup;
 			children = (
+				8E111186171322A800C923FE /* QuadraeBundle.entitlements */,
 				8E2BA10A16F63F7A009F4655 /* Supporting Files */,
 			);
 			path = QuadraeBundle;
@@ -569,6 +571,8 @@
 		8E2BA11C16F63F7A009F4655 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = QuadraeBundle/QuadraeBundle.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -583,6 +587,8 @@
 		8E2BA11D16F63F7A009F4655 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = QuadraeBundle/QuadraeBundle.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
