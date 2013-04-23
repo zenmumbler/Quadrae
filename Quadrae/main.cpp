@@ -45,7 +45,7 @@ static void mainLoop() {
 
 static bool init() {
 	// in SFML 1.x, the Window is the App, which is unfortunate
-	window_s.reset(new sf::RenderWindow(sf::VideoMode(400, 528), "Quadrae", sf::Style::Close));
+	window_s = std::make_shared<sf::RenderWindow>(sf::VideoMode(400, 528), "Quadrae", sf::Style::Close);
 	window_s->SetFramerateLimit(60);
 	
 	// try and load assets
