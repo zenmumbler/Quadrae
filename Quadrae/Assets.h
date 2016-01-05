@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Arthur Langereis. All rights reserved.
 //
 
-#ifndef __Quadrae__Assets__
-#define __Quadrae__Assets__
+#ifndef Quadrae_Assets_H
+#define Quadrae_Assets_H
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>

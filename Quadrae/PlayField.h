@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Arthur Langereis. All rights reserved.
 //
 
-#ifndef __Quadrae__PlayField__
-#define __Quadrae__PlayField__
+#ifndef Quadrae_PlayField_H
+#define Quadrae_PlayField_H
 
 #include <vector>
 #include "Shape.h"

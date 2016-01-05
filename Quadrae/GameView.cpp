@@ -87,7 +87,7 @@ void GameView::fadeClearedLines(const PlayField & field, float progress) const {
 
 
 void GameView::fadePlayField(float progress) const {
-	auto border = sf::Shape::Rectangle(24, 24, 24 + 240, 24 + 480, { 142,131,0, 255 * (1.0f - progress) });
+	auto border = sf::Shape::Rectangle(24, 24, 24 + 240, 24 + 480, { 142,131,0, (uint8_t)(255 * (1.0f - progress)) });
 	window_->Draw(border);
 }
 

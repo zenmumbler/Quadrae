@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Arthur Langereis. All rights reserved.
 //
 
-#ifndef __Quadrae__Shape__
-#define __Quadrae__Shape__
+#ifndef Quadrae_Shape_H
+#define Quadrae_Shape_H
 
 #include <cstdint>
 #include <vector>
@@ -35,15 +35,15 @@ public:
 	Tile & operator=(const Tile & rhs) { data_ = rhs.data_; return *this; }
 	Tile & operator=(uint8_t val) { data_ = val; return *this; }
 
-	constexpr bool occupied() { return type() != ShapeType::None; }
+	constexpr bool occupied() const { return type() != ShapeType::None; }
 
-	constexpr ShapeType type() { return static_cast<ShapeType>(data_ & 7); }
+	constexpr ShapeType type() const { return static_cast<ShapeType>(data_ & 7); }
 	Tile & setType(ShapeType type) { data_ = (data_ & ~7) | static_cast<uint8_t>(type); return *this; }
 
-	constexpr size_t rotation() { return (data_ >> 3) & 3; }
+	constexpr size_t rotation() const { return (data_ >> 3) & 3; }
 	Tile & setRotation(size_t rot) { data_ = (data_ & ~24) | ((rot & 3) << 3); return *this; }
 
-	constexpr size_t segment() { return (data_ >> 5) & 3; }
+	constexpr size_t segment() const { return (data_ >> 5) & 3; }
 	Tile & setSegment(size_t seg) { data_ = (data_ & ~96) | ((seg & 3) << 5); return *this; }
 };
 
